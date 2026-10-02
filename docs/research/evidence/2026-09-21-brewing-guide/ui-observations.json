@@ -1,0 +1,342 @@
+{
+  "source": "https://brewing.guide/",
+  "observedDate": "2026-09-21",
+  "browser": "153.0.8010.48",
+  "desktopViewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "mobileViewport": {
+    "width": 390,
+    "height": 844
+  },
+  "mobileIsEmulation": true,
+  "version": "not displayed",
+  "synthetic": true,
+  "actualBrews": 0,
+  "observations": [
+    {
+      "id": "DG00",
+      "kind": "navigation checkpoint before compass content loaded",
+      "url": "https://brewing.guide/",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nCALCULATOR\nTIMER\nCOMPASS\nTROUBLESHOOTER\nMETHODS\nGLOSSARY\n\nBREWING.GUIDE\n\nCoffee brewing tools and references.\n\nA ratio calculator, a stage timer, a flavor compass, plus reference pages for methods, tasting terms, and per-bag brew tracking.\n\nTOOLS\n3 ITEMS\nBrew Calculator\n\nDose, ratio, water, grind, temperature, and time for every brew method.\n\nOPEN →\nBrew Timer\n\nStage-by-stage timer for pour over, French press, AeroPress, and espresso.\n\nOPEN →\nBrew Compass\n\nPick the flavors in your cup and get a specific adjustment for the next brew.\n\nOPEN →\nGUIDES\n3 ITEMS\nTroubleshooter\n\nCommon coffee problems and the fix that usually works.\n\nOPEN →\nBrewing Methods\n\nReference page for every brew method with a grind size chart.\n\nOPEN →\nTasting Glossary\n\nPlain-language definitions of 52 coffee tasting terms.\n\nOPEN →\nDesktop\n\nEach tool works on its own. Open the calculator, timer, or compass directly from the nav and use it independently. Settings don't carry between them.\n\nMobile\n\nThe tools are connected. The calculator feeds the timer, the timer hands off to the compass, and the compass loops back to the calculator with adjustments. Each session logs to the Bag Log so you can track how a coffee dials in over time.\n\nOPEN ON YOUR PHONE\nScan to open the dial-in flow on mobile."
+    },
+    {
+      "id": "DG01",
+      "kind": "initial desktop compass; no selection",
+      "url": "https://brewing.guide/flavor",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nCALCULATOR\nTIMER\nCOMPASS\nTROUBLESHOOTER\nMETHODS\nGLOSSARY\nFix your coffee by taste.\n\nPick the flavors and problems in your cup. The compass returns specific adjustments to grind, dose, ratio, temperature, and time.\n\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nDESCRIBE WHAT YOU TASTE\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n+\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n+\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. No selection. The grid is centered.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nbalanced\nX — EXTRACTION · Y — BODY\nREADING\nBalanced\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour profile suggests a well-extracted cup.\nGRIND\n·Hold\nGrind looks right for Pour Over.\nDOSE\n·Hold\nDose looks right.\nWATER RATIO\n·Hold\nRatio looks right.\nTEMPERATURE\n·Hold\nTemperature looks right for Pour Over.\nBREW TIME\n·Hold\nTiming looks right for Pour Over.\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator."
+    },
+    {
+      "id": "DG02",
+      "kind": "C1 partial proxy: Sour / Sharp + Thin / Watery; low sweetness and uncertainty not represented",
+      "url": "https://brewing.guide/flavor",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nCALCULATOR\nTIMER\nCOMPASS\nTROUBLESHOOTER\nMETHODS\nGLOSSARY\nFix your coffee by taste.\n\nPick the flavors and problems in your cup. The compass returns specific adjustments to grind, dose, ratio, temperature, and time.\n\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nDESCRIBE WHAT YOU TASTE\n× CLEAR\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n✓\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n✓\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. Reading: extraction under center, body weak.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nX — EXTRACTION · Y — BODY\nREADING\nUnder-Extracted\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour cup reads as significantly under-extracted with thin body.\nCHECK THE ROWS TO APPLY ON YOUR NEXT BREW.\nGRIND\nTRY FIRST\n←Much Finer\nFrom Medium\nFiner grind slows flow; pour slower or in tighter circles.\nDOSE\n↑Increase (+1–2g)\nMore coffee adds body.\nWATER RATIO\n↓Lower Ratio\nFrom 1:16\nLower ratio = less water per gram of coffee. Concentrates the cup.\nTEMPERATURE\n↑+3–4°C\nFrom 93–96°C\nPush as hot as your kettle allows (94–96°C). Light roasts like the high end.\nBREW TIME\n↑Longer\nFrom 3–4 min\nSlow the pour; aim for 3:30–4:00 total.\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator."
+    },
+    {
+      "id": "DG03",
+      "kind": "cleared input; B2 uncertainty cannot be directly expressed with visible controls",
+      "url": "https://brewing.guide/flavor",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nCALCULATOR\nTIMER\nCOMPASS\nTROUBLESHOOTER\nMETHODS\nGLOSSARY\nFix your coffee by taste.\n\nPick the flavors and problems in your cup. The compass returns specific adjustments to grind, dose, ratio, temperature, and time.\n\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nDESCRIBE WHAT YOU TASTE\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n+\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n+\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. No selection. The grid is centered.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nbalanced\nX — EXTRACTION · Y — BODY\nREADING\nBalanced\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour profile suggests a well-extracted cup.\nGRIND\n·Hold\nGrind looks right for Pour Over.\nDOSE\n·Hold\nDose looks right.\nWATER RATIO\n·Hold\nRatio looks right.\nTEMPERATURE\n·Hold\nTemperature looks right for Pour Over.\nBREW TIME\n·Hold\nTiming looks right for Pour Over.\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator."
+    },
+    {
+      "id": "MG00",
+      "kind": "new bag: synthetic name, No date, roaster blank and method not selected; disabled state does not isolate roaster requirement",
+      "url": "https://brewing.guide/",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\n←\nYOUR COFFEES\nADD A NEW BAG\nROASTER / BRAND\nCOFFEE NAME\nDATE ON BAG\nROAST DATE\nBEST BY\nNO DATE\nMETHOD\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nCANCEL\nSAVE & START BREWING →\nOTHER TOOLS\nCALCULATOR →\nDose, ratio, water for any method.\nTIMER →\nStage-by-stage brew timing.\nCOMPASS →\nDiagnose what is off in the cup.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms.",
+      "saveDisabled": true
+    },
+    {
+      "id": "MG01",
+      "kind": "Pour Over selected; name filled; No date; roaster blank -> save disabled",
+      "saveDisabled": true,
+      "inputs": [
+        {
+          "value": "",
+          "labels": [
+            "Roaster / Brand"
+          ]
+        },
+        {
+          "value": "TEST simulated not brewed",
+          "labels": [
+            "Coffee Name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MG02",
+      "kind": "mobile reference setup; 15g selected, no real grinder or bean data",
+      "url": "https://brewing.guide/brew?sessionId=a44757ab-9f56-4a35-b885-ae7286ba67ab&bagId=1790000870748&method=pourOver&dose=20&water=320&ratio=16&grind=Medium&temp=93%E2%80%9396%C2%B0C&grinderSetting=&elapsed=&skipped=",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nDIAL-IN · TEST ROASTER UNKNOWN\nEXIT →\nTEST simulated not brewed\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nClarity and brightness. Reveals delicate character in light and medium roasts.\nCOFFEE DOSE\n−\n15\ng\n+\n15g\n18g\n20g\n22g\n25g\nWATER RATIO (1:X)\n−\n16\n+\n14\n15\n16\n17\n18\nWATER NEEDED\n240\nml\nMedium\nGRIND\n93–96°C\nTEMP\n3–4 min\nTIME\nOTHER TOOLS\nTIMER →\nStage-by-stage brew timing.\nCOMPASS →\nDiagnose what is off in the cup.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms.\nPOUR OVER · 15G COFFEE · 240ML WATER\nBEGIN BREWING →"
+    },
+    {
+      "id": "MG03",
+      "kind": "timer initial; simulated only, no physical brew",
+      "url": "https://brewing.guide/timer?method=pourOver&dose=15&water=240&ratio=16&grind=Medium&temp=93%E2%80%9396%C2%B0C&espresso=false&bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBLOOM\n0:40\n45ml\nPOUR 1\n0:35\n96ml\nPOUR 2\n0:35\n168ml\nFINAL POUR\n0:30\n240ml\nDRAWDOWN\n1:00\nPour Over\n15G · 240ML · MEDIUM · 93–96°C\nEDIT →\nPOUR TO\n45\nml\n0:40\nBloom\n\nPour 45ml evenly over all the grounds.\n\nWAIT FOR THE GROUNDS TO BUBBLE AND EXPAND.\nNEXT · POUR 1 · 96ML\nTAP TO START\nAbout the Brew Timer\n\nStage-by-stage brew timer with audio and haptic cues. Each method has its own staged flow (bloom, pours, drawdown for pour over; pour, steep, press for AeroPress; etc.) and the timer counts down each stage with cues at the transitions so you can keep hands on the kettle.\n\nSUPPORTED METHODS\nPour Over — bloom, two main pours, final pour, drawdown.\nFrench Press — pour, steep, press, decant.\nAeroPress — pour, steep, press.\nEspresso — pre-infuse, extract, stop.\nCold Brew — read-only step list (long passive steep, no countdown).\nMoka Pot — read-only step list (continuous heat, no countdown).\n\nNeed a dose, ratio, or grind reference first? The Brew Calculator handles the numbers. The Brewing Methods page covers each method in detail with full step-by-step process notes. If your brew tastes off, head to the Brew Compass for a flavor-to-fix adjustment."
+    },
+    {
+      "id": "MG04",
+      "kind": "timer advanced using visible Skip controls; no actual brew",
+      "skippedStages": [
+        "SKIP TO CONTENT\nbrewing\n.guide\nBLOOM\n0:20\n45ml\nPOUR 1\n0:35\n96ml\nPOUR 2\n0:35\n168ml\nFINAL POUR\n0:30\n240ml\nDRAWDOWN\n1:00\nPour Over\n15G · 240ML · MEDIUM · 93–96°C\nEDIT →\nPOUR TO\n45\nml\n0:20\nBloom\n\nPour 45ml evenly over all the grounds.\n\nWAIT FOR THE GROUNDS TO BUBBLE AND EXPAND.\nNEXT · POUR 1 · 96ML\nELAPSED\n0:20\nPAUSE\nSKIP →\n",
+        "SKIP TO CONTENT\nbrewing\n.guide\nBLOOM\n0:40\n45ml\nPOUR 1\n0:35\n96ml\nPOUR 2\n0:35\n168ml\nFINAL POUR\n0:30\n240ml\nDRAWDOWN\n1:00\nPour Over\n15G · 240ML · MEDIUM · 93–96°C\nEDIT →\nPOUR TO\n96\nml\n0:35\nPour 1\n\nPour slowly in tight circles to 96ml total.\n\nKEEP THE BED LEVEL. DON'T RUSH.\nNEXT · POUR 2 · 168ML\nELAPSED\n0:21\nPAUSE\nSKIP →\n",
+        "SKIP TO CONTENT\nbrewing\n.guide\nBLOOM\n0:40\n45ml\nPOUR 1\n0:35\n96ml\nPOUR 2\n0:35\n168ml\nFINAL POUR\n0:30\n240ml\nDRAWDOWN\n1:00\nPour Over\n15G · 240ML · MEDIUM · 93–96°C\nEDIT →\nPOUR TO\n168\nml\n0:35\nPour 2\n\nWhen level drops, pour to 168ml total.\n\nWATCH FOR THE LEVEL TO FALL BEFORE POURING.\nNEXT · FINAL POUR · 240ML\nELAPSED\n0:21\nPAUSE\nSKIP →\n",
+        "SKIP TO CONTENT\nbrewing\n.guide\nBLOOM\n0:40\n45ml\nPOUR 1\n0:35\n96ml\nPOUR 2\n0:35\n168ml\nFINAL POUR\n0:30\n240ml\nDRAWDOWN\n1:00\nPour Over\n15G · 240ML · MEDIUM · 93–96°C\nEDIT →\nPOUR TO\n240\nml\n0:30\nFinal Pour\n\nPour remaining water to 240ml total.\n\nLAST POUR. KEEP IT SLOW AND EVEN.\nNEXT · DRAWDOWN\nELAPSED\n0:21\nPAUSE\nSKIP →\n",
+        "SKIP TO CONTENT\nbrewing\n.guide\nBLOOM\n0:40\n45ml\nPOUR 1\n0:35\n96ml\nPOUR 2\n0:35\n168ml\nFINAL POUR\n0:30\n240ml\nDRAWDOWN\n1:00\nPour Over\n15G · 240ML · MEDIUM · 93–96°C\nEDIT →\n1:00\nDrawdown\n\nWait for the bed to drain completely.\n\nTOTAL BREW TIME SHOULD BE 3:00–4:00.\nELAPSED\n0:21\nPAUSE\nSKIP →\n"
+      ],
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW COMPLETE\n0:21\nTOTAL TIME\nHOW DOES IT TASTE? →\nLOG THIS BREW →\nBREW AGAIN\nOTHER TOOLS\nCALCULATOR →\nDose, ratio, water for any method.\nCOMPASS →\nDiagnose what is off in the cup.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms."
+    },
+    {
+      "id": "MG05",
+      "kind": "mobile feedback initial; no flavors selected",
+      "url": "https://brewing.guide/flavor?from=timer&method=pourOver&dose=15&water=240&ratio=16&grind=Medium&temp=93%E2%80%9396%C2%B0C&elapsed=21&bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nDIAL-IN · TEST ROASTER UNKNOWN\nTEST simulated not brewed · Pour Over\n×\nDESCRIBE WHAT YOU TASTE\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n+\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n+\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. No selection. The grid is centered.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nbalanced\nX — EXTRACTION · Y — BODY\nREADING\nBalanced\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour profile suggests a well-extracted cup.\nGRIND\n·Hold\nGrind looks right for Pour Over.\nDOSE\n·Hold\nDose looks right.\nWATER RATIO\n·Hold\nRatio looks right.\nTEMPERATURE\n·Hold\nTemperature looks right for Pour Over.\nBREW TIME\n·Hold\nTiming looks right for Pour Over.\nPICK FLAVORS ABOVE TO SEE YOUR ADJUSTMENT\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator.\n\nOTHER TOOLS\nCALCULATOR →\nDose, ratio, water for any method.\nTIMER →\nStage-by-stage brew timing.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms."
+    },
+    {
+      "id": "MG06",
+      "kind": "C1 partial proxy, same two categories as desktop, before adjustment selection",
+      "url": "https://brewing.guide/flavor?from=timer&method=pourOver&dose=15&water=240&ratio=16&grind=Medium&temp=93%E2%80%9396%C2%B0C&elapsed=21&bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nTRY FIRST · GRIND\n↓Much Finer\nSEE ALL →\nDIAL-IN · TEST ROASTER UNKNOWN\nTEST simulated not brewed · Pour Over\n×\nDESCRIBE WHAT YOU TASTE\n× CLEAR\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n✓\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n✓\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. Reading: extraction under center, body weak.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nX — EXTRACTION · Y — BODY\nREADING\nUnder-Extracted\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour cup reads as significantly under-extracted with thin body.\nCHECK THE ROWS TO APPLY ON YOUR NEXT BREW.\nGRIND\nTRY FIRST\n←Much Finer\nFrom Medium\nFiner grind slows flow; pour slower or in tighter circles.\n+ ADD NOTE\nDOSE\n↑Increase (+1–2g)\nMore coffee adds body.\n+ ADD NOTE\nWATER RATIO\n↓Lower Ratio\nFrom 1:16\nLower ratio = less water per gram of coffee. Concentrates the cup.\n+ ADD NOTE\nTEMPERATURE\n↑+3–4°C\nFrom 93–96°C\nPush as hot as your kettle allows (94–96°C). Light roasts like the high end.\n+ ADD NOTE\nBREW TIME\n↑Longer\nFrom 3–4 min\nSlow the pour; aim for 3:30–4:00 total.\n+ ADD NOTE\nAPPLY SELECTED & BREW AGAIN →\nBREW AGAIN, NO CHANGES\nFINISH & LOG →\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator.\n\nOTHER TOOLS\nCALCULATOR →\nDose, ratio, water for any method.\nTIMER →\nStage-by-stage brew timing.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms."
+    },
+    {
+      "id": "MG07",
+      "kind": "only grind selected; note explicitly planned and not executed",
+      "url": "https://brewing.guide/flavor?from=timer&method=pourOver&dose=15&water=240&ratio=16&grind=Medium&temp=93%E2%80%9396%C2%B0C&elapsed=21&bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nTRY FIRST · GRIND\n↓Much Finer\nSEE ALL →\nDIAL-IN · TEST ROASTER UNKNOWN\nTEST simulated not brewed · Pour Over\n×\nDESCRIBE WHAT YOU TASTE\n× CLEAR\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n✓\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n✓\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. Reading: extraction under center, body weak.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nX — EXTRACTION · Y — BODY\nREADING\nUnder-Extracted\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour cup reads as significantly under-extracted with thin body.\nCHECK THE ROWS TO APPLY ON YOUR NEXT BREW.\nGRIND\nTRY FIRST\n←Much Finer\nFrom Medium\nFiner grind slows flow; pour slower or in tighter circles.\n− NOTE\nDOSE\n↑Increase (+1–2g)\nMore coffee adds body.\n+ ADD NOTE\nWATER RATIO\n↓Lower Ratio\nFrom 1:16\nLower ratio = less water per gram of coffee. Concentrates the cup.\n+ ADD NOTE\nTEMPERATURE\n↑+3–4°C\nFrom 93–96°C\nPush as hot as your kettle allows (94–96°C). Light roasts like the high end.\n+ ADD NOTE\nBREW TIME\n↑Longer\nFrom 3–4 min\nSlow the pour; aim for 3:30–4:00 total.\n+ ADD NOTE\nAPPLY SELECTED & BREW AGAIN →\nBREW AGAIN, NO CHANGES\nFINISH & LOG →\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator.\n\nOTHER TOOLS\nCALCULATOR →\nDose, ratio, water for any method.\nTIMER →\nStage-by-stage brew timing.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms.",
+      "inputs": [
+        {
+          "type": "checkbox",
+          "value": "on",
+          "checked": true,
+          "aria": "Apply Grind adjustment"
+        },
+        {
+          "type": "text",
+          "value": "TEST: planned finer only; not executed or brewed. Grinder and exact setting unknown.",
+          "checked": false,
+          "aria": null
+        },
+        {
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "aria": "Apply Dose adjustment"
+        },
+        {
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "aria": "Apply Water Ratio adjustment"
+        },
+        {
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "aria": "Apply Temperature adjustment"
+        },
+        {
+          "type": "checkbox",
+          "value": "on",
+          "checked": false,
+          "aria": "Apply Brew Time adjustment"
+        }
+      ]
+    },
+    {
+      "id": "MG08",
+      "kind": "returned calculator after applying only grind",
+      "url": "https://brewing.guide/brew?method=pourOver&dose=15&ratio=16&grind=Fine&changed=grind&prevGrind=Medium&lastFix=Grind%3A+Much+Finer&bagId=1790000870748&sessionId=1f6ec0dd-7ceb-4ec5-9e4c-1dc41f1fe1a4",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nDIAL-IN · TEST ROASTER UNKNOWN\nEXIT →\nTEST simulated not brewed\nApplied: Grind: Much Finer\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nClarity and brightness. Reveals delicate character in light and medium roasts.\nCOFFEE DOSE\n−\n15\ng\n+\n15g\n18g\n20g\n22g\n25g\nWATER RATIO (1:X)\n−\n16\n+\n14\n15\n16\n17\n18\nWATER NEEDED\n240\nml\nFine\nGRIND\nwas Medium\n93–96°C\nTEMP\n3–4 min\nTIME\nOTHER TOOLS\nTIMER →\nStage-by-stage brew timing.\nCOMPASS →\nDiagnose what is off in the cup.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms.\nPOUR OVER · 15G COFFEE · 240ML WATER\nBEGIN BREWING →"
+    },
+    {
+      "id": "MG09",
+      "kind": "bag overview after applying next grind, before second brew",
+      "url": "https://brewing.guide/dial?bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\n← COFFEES\nDIAL IN\nTEST ROASTER UNKNOWN\nTEST simulated not brewed\nNo date listed · 1 brew\nDEFAULT SETTINGS\nPour Over\n20g · 1:16 · Medium · 93–96°C\nSTART BREWING →\nSELECT METHOD\nPOUR OVER\n1 brew\n✓\nFRENCH PRESS\nNot tried yet\nAEROPRESS\nNot tried yet\nESPRESSO\nNot tried yet\nCOLD BREW\nNot tried yet\nMOKA POT\nNot tried yet\nVIEW THIS BAG'S LOG →\nDELETE BAG"
+    },
+    {
+      "id": "MG10",
+      "kind": "bag log after apply-only-grind path; settled UI",
+      "url": "https://brewing.guide/log?bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTEST simulated not brewed\n\nTEST roaster unknown · all logged attempts for this bag.\n\nSHOW ALL LOGS →\nNO ENTRIES YET\n+ NEW ENTRY\nNothing logged for this bag yet.\n+ NEW ENTRY\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either."
+    },
+    {
+      "id": "MG11",
+      "kind": "independent B2 manual log form; not a continuation; rating and unknowns blank",
+      "url": "https://brewing.guide/log?bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTEST simulated not brewed\n\nTEST roaster unknown · all logged attempts for this bag.\n\nSHOW ALL LOGS →\nNO ENTRIES YET\nCANCEL\nCOFFEE*\nMETHOD\n—\nPour Over\nFrench Press\nAeroPress\nEspresso\nCold Brew\nMoka Pot\nDOSE (G)\nRATIO\nCOMPASS READING\nWHAT YOU TASTED\nADJUSTMENT MADE\nTASTING NOTES\nRATING\n★\n★\n★\n★\n★\nCANCEL\nSAVE\nNothing logged for this bag yet.\n+ NEW ENTRY\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either.",
+      "fields": [
+        {
+          "value": "TEST B2 independent - not brewed",
+          "labels": [
+            "Coffee*"
+          ]
+        },
+        {
+          "value": "Pour Over",
+          "labels": [
+            "Method—Pour OverFrench PressAeroPressEspressoCold BrewMoka Pot"
+          ]
+        },
+        {
+          "value": "",
+          "labels": [
+            "Dose (g)"
+          ]
+        },
+        {
+          "value": "",
+          "labels": [
+            "Ratio"
+          ]
+        },
+        {
+          "value": "",
+          "labels": [
+            "Compass reading"
+          ]
+        },
+        {
+          "value": "似乎有一点苦，但不确定，也说不清整体比前杯好还是差。",
+          "labels": [
+            "What you tasted"
+          ]
+        },
+        {
+          "value": "",
+          "labels": [
+            "Adjustment made"
+          ]
+        },
+        {
+          "value": "TEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion.",
+          "labels": [
+            "Tasting notesTEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MG12",
+      "kind": "B2 manual log saved",
+      "url": "https://brewing.guide/log?bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTEST simulated not brewed\n\nTEST roaster unknown · all logged attempts for this bag.\n\nSHOW ALL LOGS →\nNO ENTRIES YET\nEXPORT CSV\n+ NEW ENTRY\nNothing logged for this bag yet.\n+ NEW ENTRY\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either."
+    },
+    {
+      "id": "MG13",
+      "kind": "all logs shows independent manual B2 entry; bag-filtered view had no entries",
+      "url": "https://brewing.guide/log?bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTrack what you brew.\n\nCoffee, method, dose, ratio, tasting notes. Stored privately in your browser — no account, no server, no sync. Export to CSV when you want a backup.\n\nALL ENTRIES\nBY BAG\n1 BREW · AVG 4.0 ★\nEXPORT CSV\n+ NEW ENTRY\nOTHER BREWS\nTEST B2 independent - not brewed\nSEP 21, 2026\n×\n[POUR OVER]\n★★★★★\n似乎有一点苦，但不确定，也说不清整体比前杯好还是差。\n\nTEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion.\n\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either."
+    },
+    {
+      "id": "MG14",
+      "kind": "fresh manual form defaults to four highlighted stars; clicking fourth star did not clear; cancelled without second save",
+      "ratingButtons": [
+        {
+          "aria": "1 star",
+          "color": "rgb(124, 92, 36)"
+        },
+        {
+          "aria": "2 stars",
+          "color": "rgb(124, 92, 36)"
+        },
+        {
+          "aria": "3 stars",
+          "color": "rgb(124, 92, 36)"
+        },
+        {
+          "aria": "4 stars",
+          "color": "rgb(124, 92, 36)"
+        },
+        {
+          "aria": "5 stars",
+          "color": "rgb(200, 192, 164)"
+        }
+      ],
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTrack what you brew.\n\nCoffee, method, dose, ratio, tasting notes. Stored privately in your browser — no account, no server, no sync. Export to CSV when you want a backup.\n\nALL ENTRIES\nBY BAG\n1 BREW · AVG 4.0 ★\nEXPORT CSV\nCANCEL\nCOFFEE*\nMETHOD\n—\nPour Over\nFrench Press\nAeroPress\nEspresso\nCold Brew\nMoka Pot\nDOSE (G)\nRATIO\nCOMPASS READING\nWHAT YOU TASTED\nADJUSTMENT MADE\nTASTING NOTES\nRATING\n★\n★\n★\n★\n★\nCANCEL\nSAVE\nOTHER BREWS\nTEST B2 independent - not brewed\nSEP 21, 2026\n×\n[POUR OVER]\n★★★★★\n似乎有一点苦，但不确定，也说不清整体比前杯好还是差。\n\nTEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion.\n\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either."
+    },
+    {
+      "id": "MG15",
+      "kind": "exploratory replay of observed timer-feedback URL; not independent v03 branch; no adjustments checked; Finish & Log path",
+      "url": "https://brewing.guide/flavor?from=timer&method=pourOver&dose=15&water=240&ratio=16&grind=Medium&temp=93%E2%80%9396%C2%B0C&elapsed=21&bagId=1790000870748",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nTRY FIRST · GRIND\n↓Much Finer\nSEE ALL →\nDIAL-IN · TEST ROASTER UNKNOWN\nTEST simulated not brewed · Pour Over · undefinedg · 1:undefined · undefined\n×\nDESCRIBE WHAT YOU TASTE\n× CLEAR\nFruity\n+\nBright, fresh fruit notes.\nSweet\n+\nSugary, confection-like notes.\nNutty / Cocoa\n+\nRich, roasty, grounding flavors.\nSour / Sharp\n✓\nAcid-forward, under-extracted.\nBitter / Harsh\n+\nDark, dry, over-extracted.\nThin / Watery\n✓\nWeak body, hollow finish.\nHeavy / Astringent\n+\nDrying, tannic, too much.\nGrassy / Raw\n+\nVegetal, under-developed.\nBrew grid. Horizontal axis is extraction, from UNDER (sour, sharp) on the left to OVER (bitter, harsh) on the right. Vertical axis is body, from STRONG (heavy, dense) at the top to WEAK (thin, hollow) at the bottom. Reading: extraction under center, body weak.\nUNDER\nsour · sharp\nOVER\nbitter · harsh\nSTRONG\nheavy · dense\nWEAK\nthin · hollow\nX — EXTRACTION · Y — BODY\nREADING\nUnder-Extracted\nADJUSTMENTS FOR POUR OVER\nADJUSTMENTS\nYour cup reads as significantly under-extracted with thin body.\nCHECK THE ROWS TO APPLY ON YOUR NEXT BREW.\nGRIND\nTRY FIRST\n←Much Finer\nFrom Medium\nFiner grind slows flow; pour slower or in tighter circles.\n− NOTE\nDOSE\n↑Increase (+1–2g)\nMore coffee adds body.\n+ ADD NOTE\nWATER RATIO\n↓Lower Ratio\nFrom 1:16\nLower ratio = less water per gram of coffee. Concentrates the cup.\n+ ADD NOTE\nTEMPERATURE\n↑+3–4°C\nFrom 93–96°C\nPush as hot as your kettle allows (94–96°C). Light roasts like the high end.\n+ ADD NOTE\nBREW TIME\n↑Longer\nFrom 3–4 min\nSlow the pour; aim for 3:30–4:00 total.\n+ ADD NOTE\nAPPLY SELECTED & BREW AGAIN →\nBREW AGAIN, NO CHANGES\nFINISH & LOG →\nAbout the Brew Compass\n\nThe Brew Compass is a flavor-to-fix tool. Pick the flavors you taste in your cup and the problems you want to solve, and the compass returns a specific brewing adjustment to make on your next brew: grind finer or coarser, raise or lower water temperature, dose more or less coffee, or change the ratio.\n\nHOW TO USE IT\nPick the method you just brewed.\nTap the flavors and tasting notes that describe your cup (sour, bitter, thin, heavy, grassy, fruity, sweet, balanced).\nRead the adjustment the compass returns, with a brief note on why.\nApply the adjustment on your next brew. Repeat to dial in.\n\nPrefer a text-based version? The Troubleshooter covers the same common problems (sour, bitter, thin, heavy, grassy, channeling) with plain-language fixes. The Tasting Glossary defines every flavor term in plain language. When you're ready to brew again, head back to the Brew Calculator.\n\nOTHER TOOLS\nCALCULATOR →\nDose, ratio, water for any method.\nTIMER →\nStage-by-stage brew timing.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms."
+    },
+    {
+      "id": "MG16",
+      "kind": "Finish & Log destination",
+      "url": "https://brewing.guide/log?from=flavor&method=pourOver&dose=15&water=240&ratio=1%3A16&grind=Medium&compassReading=Under-Extracted&compassExt=-0.55&compassStr=-0.55&flavors=Sour+%2F+Sharp%2C+Thin+%2F+Watery&bagId=1790000870748&coffee=TEST+roaster+unknown+%C2%B7+TEST+simulated+not+brewed",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTrack what you brew.\n\nCoffee, method, dose, ratio, tasting notes. Stored privately in your browser — no account, no server, no sync. Export to CSV when you want a backup.\n\nALL ENTRIES\nBY BAG\n1 BREW · AVG 4.0 ★\nEXPORT CSV\nCANCEL\n+ NEW ENTRY · ATTACHING TO BAG\nCOFFEE*\nMETHOD\n—\nPour Over\nFrench Press\nAeroPress\nEspresso\nCold Brew\nMoka Pot\nDOSE (G)\nRATIO\nCOMPASS READING\nWHAT YOU TASTED\nADJUSTMENT MADE\nTASTING NOTES\nRATING\n★\n★\n★\n★\n★\nCANCEL\nSAVE\nTEST B2 independent - not brewed\nSEP 21, 2026\n×\n[POUR OVER]\n★★★★★\n似乎有一点苦，但不确定，也说不清整体比前杯好还是差。\n\nTEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion.\n\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either.",
+      "fields": [
+        {
+          "value": "TEST roaster unknown · TEST simulated not brewed",
+          "labels": [
+            "Coffee*"
+          ]
+        },
+        {
+          "value": "Pour Over",
+          "labels": [
+            "Method—Pour OverFrench PressAeroPressEspressoCold BrewMoka Pot"
+          ]
+        },
+        {
+          "value": "15",
+          "labels": [
+            "Dose (g)"
+          ]
+        },
+        {
+          "value": "1:16",
+          "labels": [
+            "Ratio"
+          ]
+        },
+        {
+          "value": "Under-Extracted",
+          "labels": [
+            "Compass reading"
+          ]
+        },
+        {
+          "value": "Sour / Sharp, Thin / Watery",
+          "labels": [
+            "What you tasted"
+          ]
+        },
+        {
+          "value": "",
+          "labels": [
+            "Adjustment made"
+          ]
+        },
+        {
+          "value": "",
+          "labels": [
+            "Tasting notes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MG17",
+      "kind": "Finish & Log explicit save; selected 2 stars for simulated C1 dissatisfaction",
+      "url": "https://brewing.guide/log?from=flavor&method=pourOver&dose=15&water=240&ratio=1%3A16&grind=Medium&compassReading=Under-Extracted&compassExt=-0.55&compassStr=-0.55&flavors=Sour+%2F+Sharp%2C+Thin+%2F+Watery&bagId=1790000870748&coffee=TEST+roaster+unknown+%C2%B7+TEST+simulated+not+brewed",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTrack what you brew.\n\nCoffee, method, dose, ratio, tasting notes. Stored privately in your browser — no account, no server, no sync. Export to CSV when you want a backup.\n\nALL ENTRIES\nBY BAG\n2 BREWS · AVG 3.0 ★\nEXPORT CSV\n+ NEW ENTRY\nTEST roaster unknown · TEST simulated not brewed\nSEP 21, 2026\nBAG\n×\n[POUR OVER]\n[15G]\n[1:16]\n[MEDIUM]\n★★★★★\nUnder-Extracted · Sour / Sharp, Thin / Watery\n\nTEST C1 exploratory replay only, not brewed or tasted. 原始模拟反馈：明显偏酸、偏薄、甜感弱，不满意。Only Sour / Sharp and Thin / Watery were mapped into the compass; low sweetness was not represented. No adjustment was executed. Revisited the original timer-feedback URL to inspect Finish & Log, not a new cup.\n\nTEST B2 independent - not brewed\nSEP 21, 2026\n×\n[POUR OVER]\n★★★★★\n似乎有一点苦，但不确定，也说不清整体比前杯好还是差。\n\nTEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion.\n\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either."
+    },
+    {
+      "id": "MG18",
+      "kind": "reloaded log; auto-opened draft cancelled, two saved entries retained; no third log saved",
+      "url": "https://brewing.guide/log?from=flavor&method=pourOver&dose=15&water=240&ratio=1%3A16&grind=Medium&compassReading=Under-Extracted&compassExt=-0.55&compassStr=-0.55&flavors=Sour+%2F+Sharp%2C+Thin+%2F+Watery&bagId=1790000870748&coffee=TEST+roaster+unknown+%C2%B7+TEST+simulated+not+brewed",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nBREW LOG · LOCAL ONLY\nTrack what you brew.\n\nCoffee, method, dose, ratio, tasting notes. Stored privately in your browser — no account, no server, no sync. Export to CSV when you want a backup.\n\nALL ENTRIES\nBY BAG\n2 BREWS · AVG 3.0 ★\nEXPORT CSV\n+ NEW ENTRY\nTEST roaster unknown · TEST simulated not brewed\nSEP 21, 2026\nBAG\n×\n[POUR OVER]\n[15G]\n[1:16]\n[MEDIUM]\n★★★★★\nUnder-Extracted · Sour / Sharp, Thin / Watery\n\nTEST C1 exploratory replay only, not brewed or tasted. 原始模拟反馈：明显偏酸、偏薄、甜感弱，不满意。Only Sour / Sharp and Thin / Watery were mapped into the compass; low sweetness was not represented. No adjustment was executed. Revisited the original timer-feedback URL to inspect Finish & Log, not a new cup.\n\nTEST B2 independent - not brewed\nSEP 21, 2026\n×\n[POUR OVER]\n★★★★★\n似乎有一点苦，但不确定，也说不清整体比前杯好还是差。\n\nTEST ONLY: independent B2 recording fixture, not brewed or tasted. No prior brew comparison actually performed. Unknown dose, ratio, compass reading, adjustment and rating intentionally left blank. This is not a second cup after the grind suggestion.\n\nAll entries are stored locally in your browser. Clearing site data or switching browsers will lose them — export to CSV before you do either."
+    },
+    {
+      "id": "MG19",
+      "kind": "Read-only revisit of observed next-recipe URL; attempted scroll to Fine; screenshot captured top portion only, so Fine value is supported by page text and URL, not this screenshot; no new brew",
+      "url": "https://brewing.guide/brew?method=pourOver&dose=15&ratio=16&grind=Fine&changed=grind&prevGrind=Medium&lastFix=Grind%3A+Much+Finer&bagId=1790000870748&sessionId=1f6ec0dd-7ceb-4ec5-9e4c-1dc41f1fe1a4",
+      "text": "SKIP TO CONTENT\nbrewing\n.guide\nDIAL-IN · TEST ROASTER UNKNOWN\nEXIT →\nTEST simulated not brewed\nApplied: Grind: Much Finer\nPOUR OVER\nFRENCH PRESS\nAEROPRESS\nESPRESSO\nCOLD BREW\nMOKA POT\nClarity and brightness. Reveals delicate character in light and medium roasts.\nCOFFEE DOSE\n−\n15\ng\n+\n15g\n18g\n20g\n22g\n25g\nWATER RATIO (1:X)\n−\n16\n+\n14\n15\n16\n17\n18\nWATER NEEDED\n240\nml\nFine\nGRIND\nwas Medium\n93–96°C\nTEMP\n3–4 min\nTIME\nOTHER TOOLS\nTIMER →\nStage-by-stage brew timing.\nCOMPASS →\nDiagnose what is off in the cup.\nMETHODS →\nLong-form guide per method.\nTROUBLESHOOTER →\nCommon problems, plain fixes.\nGLOSSARY →\n52 tasting terms.\nPOUR OVER · 15G COFFEE · 240ML WATER\nBEGIN BREWING →"
+    }
+  ]
+}

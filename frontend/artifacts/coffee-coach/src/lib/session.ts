@@ -1,44 +1,92 @@
 /**
- * Cross-session persistence for the trajectory ("我的") page.
- *
- * ★ Why this exists (FRONTEND.md 屏5): the trajectory page must carry a
- * visible "跨会话持久化标识" -- proof that "上一杯" comes from durable
- * storage, not from in-memory chat context. localStorage is the simplest
- * honest way to demonstrate that in a local-only vertical slice: closing
- * the tab and reopening it must still show the same cup history.
- *
- * This does NOT replace the ADK session (which owns the agent's own
- * conversational/diagnostic state) -- it is the frontend's own record of
- * every `record_cup` the agent has returned, used to render Cup Timeline
- * and the trajectory chart without re-deriving them from chat transcripts.
+ * 访问码登录与这位访客的页面缓存。
+ * 后端用 HttpOnly Cookie 验证身份，前端只接收已确认的 userId。
+ * Neon 中的 ADK session 是 Agent 记忆；localStorage 保存页面展示的回执。
+ * 缓存按访客分组，避免 Cookie 更换后把另一位访客的“上一杯”显示出来。
  */
 import type { RecordCup, SeedRecipe } from './adkClient';
+import { ADK_BASE_URL } from './config';
 
-const USER_ID_KEY = 'coffee-coach:user-id';
 const SESSION_ID_KEY = 'coffee-coach:session-id';
 const CUPS_KEY = 'coffee-coach:cups';
 const SEED_KEY = 'coffee-coach:seed';
 const SEED_RECIPE_KEY = 'coffee-coach:seed-recipe';
 const LATEST_SENSORY_KEY = 'coffee-coach:latest-sensory';
 
+// 页面刷新后先向后端确认 Cookie；旧 localStorage ID 不能证明已登录。
+let verifiedUserId: string | null = null;
+
+async function acceptVisitor(response: Response): Promise<string> {
+  const visitor: unknown = await response.json();
+  if (
+    !visitor || typeof visitor !== 'object' ||
+    !('userId' in visitor) || typeof visitor.userId !== 'string' ||
+    !/^guest-[a-f0-9]{32}$/.test(visitor.userId)
+  ) {
+    throw new Error('登录信息不完整，请重新登录。');
+  }
+  verifiedUserId = visitor.userId;
+  return verifiedUserId;
+}
+
+/** 恢复 Cookie 中的访客。401 表示需登录；网络或服务故障另行报错。 */
+export async function restoreVisitor(): Promise<string | null> {
+  verifiedUserId = null;
+  const response = await fetch(`${ADK_BASE_URL}/auth/me`, {
+    credentials: 'same-origin', cache: 'no-store',
+  });
+  if (response.status === 401) return null;
+  if (!response.ok) throw new Error('暂时无法确认登录状态，请稍后重试。');
+  return acceptVisitor(response);
+}
+
+/** 访问码只发送给后端验证，不写入浏览器存储。 */
+export async function loginWithAccessCode(accessCode: string): Promise<string> {
+  verifiedUserId = null;
+  if (!accessCode || accessCode.length > 256) {
+    throw new Error('请输入有效的访问码。');
+  }
+  const response = await fetch(`${ADK_BASE_URL}/auth/login`, {
+    method: 'POST', credentials: 'same-origin', cache: 'no-store',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ access_code: accessCode }),
+  });
+  if (response.status === 401 || response.status === 422) {
+    throw new Error('访问码不正确，请检查后重试。');
+  }
+  if (!response.ok) throw new Error('暂时无法登录，请稍后重试。');
+  return acceptVisitor(response);
+}
+
+export async function logoutVisitor(): Promise<void> {
+  const response = await fetch(`${ADK_BASE_URL}/auth/logout`, {
+    method: 'POST', credentials: 'same-origin', cache: 'no-store',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({}),
+  });
+  if (!response.ok) throw new Error('退出未完成，请重试。');
+  verifiedUserId = null;
+}
+
 function randomId(prefix: string): string {
   return `${prefix}-${Math.random().toString(36).slice(2, 10)}${Date.now().toString(36)}`;
 }
 
 export function getUserId(): string {
-  let id = localStorage.getItem(USER_ID_KEY);
-  if (!id) {
-    id = randomId('user');
-    localStorage.setItem(USER_ID_KEY, id);
-  }
-  return id;
+  if (!verifiedUserId) throw new Error('请先输入访问码登录。');
+  return verifiedUserId;
+}
+
+function storageKey(key: string): string {
+  return `${key}:${getUserId()}`;
 }
 
 export function getSessionId(): string {
-  let id = localStorage.getItem(SESSION_ID_KEY);
+  const key = storageKey(SESSION_ID_KEY);
+  let id = localStorage.getItem(key);
   if (!id) {
     id = randomId('session');
-    localStorage.setItem(SESSION_ID_KEY, id);
+    localStorage.setItem(key, id);
   }
   return id;
 }
@@ -48,7 +96,7 @@ export function getSessionId(): string {
  * bag; ordinary refreshes and reopened tabs keep the current bag's history. */
 export function startNewSession(): string {
   const id = randomId('session');
-  localStorage.setItem(SESSION_ID_KEY, id);
+  localStorage.setItem(storageKey(SESSION_ID_KEY), id);
   return id;
 }
 
@@ -58,7 +106,8 @@ export interface StoredCup extends RecordCup {
 }
 
 export function getCupHistory(): StoredCup[] {
-  const raw = localStorage.getItem(CUPS_KEY);
+  if (!verifiedUserId) return [];
+  const raw = localStorage.getItem(storageKey(CUPS_KEY));
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);
@@ -72,12 +121,12 @@ export function appendCup(cup: RecordCup): StoredCup[] {
   const history = getCupHistory();
   const withTimestamp: StoredCup = { ...cup, recordedAt: new Date().toISOString() };
   const next = [...history, withTimestamp];
-  localStorage.setItem(CUPS_KEY, JSON.stringify(next));
+  localStorage.setItem(storageKey(CUPS_KEY), JSON.stringify(next));
   return next;
 }
 
 export function clearCupHistory(): void {
-  localStorage.removeItem(CUPS_KEY);
+  localStorage.removeItem(storageKey(CUPS_KEY));
 }
 
 /**
@@ -86,7 +135,8 @@ export function clearCupHistory(): void {
  * deliberately not used to decide which probe options the UI may show.
  */
 export function getLatestSensory(): string[] {
-  const raw = localStorage.getItem(LATEST_SENSORY_KEY);
+  if (!verifiedUserId) return [];
+  const raw = localStorage.getItem(storageKey(LATEST_SENSORY_KEY));
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);
@@ -99,24 +149,25 @@ export function getLatestSensory(): string[] {
 }
 
 export function setLatestSensory(sensory: string[]): void {
-  localStorage.setItem(LATEST_SENSORY_KEY, JSON.stringify(sensory));
+  localStorage.setItem(storageKey(LATEST_SENSORY_KEY), JSON.stringify(sensory));
 }
 
 export function clearLatestSensory(): void {
-  localStorage.removeItem(LATEST_SENSORY_KEY);
+  localStorage.removeItem(storageKey(LATEST_SENSORY_KEY));
 }
 
 /** Cold-start seed recipe text returned by the agent, shown on later screens. */
 export function getSeed(): string | null {
-  return localStorage.getItem(SEED_KEY);
+  return verifiedUserId ? localStorage.getItem(storageKey(SEED_KEY)) : null;
 }
 
 export function setSeed(seedText: string): void {
-  localStorage.setItem(SEED_KEY, seedText);
+  localStorage.setItem(storageKey(SEED_KEY), seedText);
 }
 
 export function getSeedRecipe(): SeedRecipe | null {
-  const raw = localStorage.getItem(SEED_RECIPE_KEY);
+  if (!verifiedUserId) return null;
+  const raw = localStorage.getItem(storageKey(SEED_RECIPE_KEY));
   if (!raw) return null;
   try {
     const parsed = JSON.parse(raw);
@@ -128,8 +179,8 @@ export function getSeedRecipe(): SeedRecipe | null {
 
 export function setSeedRecipe(recipe: SeedRecipe | null): void {
   if (!recipe) {
-    localStorage.removeItem(SEED_RECIPE_KEY);
+    localStorage.removeItem(storageKey(SEED_RECIPE_KEY));
     return;
   }
-  localStorage.setItem(SEED_RECIPE_KEY, JSON.stringify(recipe));
+  localStorage.setItem(storageKey(SEED_RECIPE_KEY), JSON.stringify(recipe));
 }

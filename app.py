@@ -6,17 +6,21 @@
   COFFEE_COOKIE_SECRET: 至少 32 个字符的 Cookie 签名密钥。
   DATABASE_URL: 线上用 Neon pooled PostgreSQL URL。
   SESSION_SERVICE_URI: 本地验证时可代替 DATABASE_URL，使用文件型 SQLite。
-线上还需配置原 Agent 使用的 Google 模型凭证；本文件不保存凭证。
+  GOOGLE_SERVICE_ACCOUNT_JSON: 线上 Google 服务账号 JSON，通过平台 Secret 注入。
+线上还需配置 GOOGLE_GENAI_USE_VERTEXAI、GOOGLE_CLOUD_PROJECT 和 GOOGLE_CLOUD_LOCATION。
+本文件不保存凭证。
 """
 
 import hashlib
 import hmac
+import json
 import logging
 import os
 import re
 import time
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, contextmanager
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Annotated, Literal
 from uuid import uuid4
 
@@ -36,6 +40,42 @@ COOKIE_NAME = "coffee_guest"
 COOKIE_LIFETIME = 30 * 24 * 60 * 60
 ID_PATTERN = r"^[A-Za-z0-9_-]{1,96}$"
 logger = logging.getLogger(__name__)
+
+
+@contextmanager
+def google_credentials_from_environment():
+    """把云端 Secret 适配为 Google SDK 的凭证文件；不进入源码或构建产物。"""
+    raw = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
+    if not raw:
+        if os.environ.get("VERCEL"):
+            raise RuntimeError("Configure GOOGLE_SERVICE_ACCOUNT_JSON as a server-only Secret.")
+        yield
+        return
+
+    from google.oauth2.service_account import Credentials
+
+    try:
+        info = json.loads(raw)
+        if not isinstance(info, dict) or info.get("type") != "service_account":
+            raise ValueError("Expected service account credentials.")
+        Credentials.from_service_account_info(info)
+    except (ValueError, TypeError, KeyError):
+        raise RuntimeError("Configure valid GOOGLE_SERVICE_ACCOUNT_JSON credentials.") from None
+
+    previous = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    with TemporaryDirectory(prefix="coffee-google-") as folder:
+        path = Path(folder) / "credentials.json"
+        descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(descriptor, "w") as file:
+            json.dump(info, file)
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(path)
+        try:
+            yield
+        finally:
+            if previous is None:
+                os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
+            else:
+                os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = previous
 
 
 @asynccontextmanager
@@ -71,27 +111,28 @@ async def lifespan(app: FastAPI):
         from dotenv import load_dotenv
 
         load_dotenv(Path(__file__).parent / "agents/hello_agent/.env")
-    from agents.hello_agent.agent import root_agent
+    with google_credentials_from_environment():
+        from agents.hello_agent.agent import root_agent
 
-    db_options = (
-        {"pool_size": 2, "max_overflow": 0, "pool_pre_ping": True}
-        if is_postgres else {}
-    )
-    sessions = DatabaseSessionService(db_url=db_url, **db_options)
-    runner = Runner(app_name=APP_NAME, agent=root_agent, session_service=sessions)
-    app.state.sessions = sessions
-    app.state.runner = runner
-    app.state.access_code_hash = hashlib.sha256(access_code.encode()).digest()
-    # 访问码或签名密钥轮换后，旧 Cookie 都会失效。
-    app.state.cookie_key = hmac.digest(cookie_secret.encode(), access_code.encode(), "sha256")
-    app.state.secure_cookie = bool(os.environ.get("VERCEL"))
-    try:
-        yield
-    finally:
+        db_options = (
+            {"pool_size": 2, "max_overflow": 0, "pool_pre_ping": True}
+            if is_postgres else {}
+        )
+        sessions = DatabaseSessionService(db_url=db_url, **db_options)
+        runner = Runner(app_name=APP_NAME, agent=root_agent, session_service=sessions)
+        app.state.sessions = sessions
+        app.state.runner = runner
+        app.state.access_code_hash = hashlib.sha256(access_code.encode()).digest()
+        # 访问码或签名密钥轮换后，旧 Cookie 都会失效。
+        app.state.cookie_key = hmac.digest(cookie_secret.encode(), access_code.encode(), "sha256")
+        app.state.secure_cookie = bool(os.environ.get("VERCEL"))
         try:
-            await runner.close()
+            yield
         finally:
-            await sessions.close()
+            try:
+                await runner.close()
+            finally:
+                await sessions.close()
 
 
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)

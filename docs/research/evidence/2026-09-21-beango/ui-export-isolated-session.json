@@ -1,0 +1,766 @@
+{
+  "beans": [
+    {
+      "id": "286357e7-4e5f-4847-beb0-c388d16a31f8",
+      "createdAt": 1789987460119,
+      "updatedAt": 1789987936723,
+      "brewCount": 3,
+      "lastBrewedAt": 1789987936705,
+      "isFavorite": false,
+      "tastingNotes": [],
+      "name": "TEST - simulated V60 - not brewed",
+      "priceCurrency": "USD",
+      "notes": "TEST ONLY. Synthetic walkthrough fixture. No coffee brewed or tasted. Bean origin, roast and grinder unknown; intentionally left blank.",
+      "origin": "Other",
+      "process": "washed",
+      "roastLevel": "light",
+      "_deleted": 0
+    },
+    {
+      "id": "319f84c0-4eea-4b34-a8fd-8d5489c060a4",
+      "createdAt": 1787380135863,
+      "updatedAt": 1789367335863,
+      "name": "Brazil Boa Vista Natural",
+      "origin": "Brazil",
+      "region": "Sul de Minas",
+      "estate": "Fazenda Boa Vista",
+      "process": "natural",
+      "roastLevel": "medium-dark",
+      "roaster": "Blue Bottle",
+      "roastDate": 1788071335863,
+      "purchaseDate": 1788244135863,
+      "weight": 340,
+      "price": 16,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Chocolate",
+        "Hazelnut",
+        "Caramel",
+        "Plum"
+      ],
+      "harvest": "2023",
+      "isFavorite": false,
+      "brewCount": 5,
+      "lastBrewedAt": 1789367335863,
+      "cuppingScore": 88.8,
+      "cuppingScores": {
+        "aroma": 8.25,
+        "flavor": 8.42,
+        "aftertaste": 8.08,
+        "acidity": 8,
+        "body": 8.25,
+        "balance": 8.17,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 8.42
+      }
+    },
+    {
+      "id": "332e4563-0a25-4d31-839c-fe1bf224b8ad",
+      "createdAt": 1789280935863,
+      "updatedAt": 1789626535863,
+      "name": "Costa Rica Las Lajas Honey",
+      "origin": "Costa_Rica",
+      "region": "Sabanilla",
+      "estate": "Las Lajas",
+      "variety": "Caturra",
+      "process": "honey",
+      "roastLevel": "medium-light",
+      "roaster": "Stumptown",
+      "roastDate": 1789540135863,
+      "purchaseDate": 1789712935863,
+      "weight": 250,
+      "price": 20,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Honey",
+        "Peach",
+        "Chocolate",
+        "Vanilla"
+      ],
+      "harvest": "2023",
+      "isFavorite": false,
+      "brewCount": 1,
+      "lastBrewedAt": 1789626535863,
+      "cuppingScore": 84.3,
+      "cuppingScores": {
+        "aroma": 7.75,
+        "flavor": 7.67,
+        "aftertaste": 7.5,
+        "acidity": 7.58,
+        "body": 7.67,
+        "balance": 7.75,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 7.42
+      }
+    },
+    {
+      "id": "442d67bd-5124-4da0-9fe1-2323e8b4264a",
+      "createdAt": 1787812135863,
+      "updatedAt": 1789540135863,
+      "name": "Ethiopia Hambela Natural Heirloom",
+      "origin": "Ethiopia",
+      "region": "Guji-Hambela",
+      "estate": "Hambela Farm",
+      "variety": "Heirloom",
+      "process": "natural",
+      "roastLevel": "light",
+      "roaster": "Counter Culture",
+      "roastDate": 1788416935863,
+      "purchaseDate": 1788589735863,
+      "weight": 250,
+      "price": 24,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Jasmine",
+        "Blueberry",
+        "Raspberry",
+        "Honey"
+      ],
+      "altitude": "1800–2200 masl",
+      "harvest": "2023",
+      "isFavorite": true,
+      "brewCount": 2,
+      "lastBrewedAt": 1789540135863,
+      "cuppingScore": 89,
+      "cuppingScores": {
+        "aroma": 8.5,
+        "flavor": 8.5,
+        "aftertaste": 8.25,
+        "acidity": 8.25,
+        "body": 8.25,
+        "balance": 8.25,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 8
+      }
+    },
+    {
+      "id": "73daa89b-0ab2-44d9-b0d6-9e9c1527691b",
+      "createdAt": 1789453735863,
+      "updatedAt": 1789453735863,
+      "name": "Costa Rica Tarrazu Washed Typica",
+      "origin": "Costa_Rica",
+      "region": "Tarrazú",
+      "estate": "Coopedota",
+      "variety": "Caturra",
+      "process": "washed",
+      "roastLevel": "medium-light",
+      "roaster": "Fuglen",
+      "weight": 200,
+      "price": 22,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Honey",
+        "Peach",
+        "Caramel",
+        "Sweet"
+      ],
+      "altitude": "1500–1700 masl",
+      "harvest": "2023",
+      "isFavorite": false,
+      "brewCount": 0,
+      "cuppingScore": 83.5,
+      "cuppingScores": {
+        "aroma": 7.67,
+        "flavor": 7.58,
+        "aftertaste": 7.42,
+        "acidity": 7.67,
+        "body": 7.5,
+        "balance": 7.67,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 7.5
+      }
+    },
+    {
+      "id": "959c0594-9b52-41ac-87ee-480f496b06b7",
+      "createdAt": 1788935335863,
+      "updatedAt": 1789799335863,
+      "name": "Kenya Nyeri Washed SL28 AA",
+      "origin": "Kenya",
+      "region": "Nyeri",
+      "estate": "Gichatha-ini Factory",
+      "variety": "SL28/SL34",
+      "grade": "AA",
+      "process": "washed",
+      "roastLevel": "light",
+      "roaster": "George Howell",
+      "roastDate": 1789280935863,
+      "purchaseDate": 1789453735863,
+      "weight": 227,
+      "price": 26,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Blackberry",
+        "Grapefruit",
+        "Tomato",
+        "Tart"
+      ],
+      "altitude": "1700–2000 masl",
+      "harvest": "2023",
+      "isFavorite": true,
+      "brewCount": 2,
+      "lastBrewedAt": 1789799335863,
+      "cuppingScore": 88.3,
+      "cuppingScores": {
+        "aroma": 8.17,
+        "flavor": 8.17,
+        "aftertaste": 8,
+        "acidity": 8.25,
+        "body": 8,
+        "balance": 8.25,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 8
+      }
+    },
+    {
+      "id": "b50a07bd-a181-4f76-9946-89c07e52c0bb",
+      "createdAt": 1788676135863,
+      "updatedAt": 1789885735863,
+      "name": "Ethiopia Kochere Washed Heirloom",
+      "origin": "Ethiopia",
+      "region": "Kochere, Yirgacheffe",
+      "estate": "Kochere Washing Station",
+      "variety": "Heirloom",
+      "process": "washed",
+      "roastLevel": "light",
+      "roaster": "Onyx Coffee Lab",
+      "roastDate": 1789108135863,
+      "purchaseDate": 1789280935863,
+      "weight": 250,
+      "price": 22,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Jasmine",
+        "Blueberry",
+        "Black Tea",
+        "Lemon"
+      ],
+      "altitude": "1950–2200 masl",
+      "harvest": "2023",
+      "isFavorite": true,
+      "brewCount": 3,
+      "lastBrewedAt": 1789885735863,
+      "cuppingScore": 90.6,
+      "cuppingScores": {
+        "aroma": 8.67,
+        "flavor": 8.83,
+        "aftertaste": 8.67,
+        "acidity": 8.75,
+        "body": 8.5,
+        "balance": 8.42,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 8.75
+      }
+    },
+    {
+      "id": "e1789bc0-229d-42ac-9bef-0926dd29f30e",
+      "createdAt": 1788416935863,
+      "updatedAt": 1789194535863,
+      "name": "Colombia Huila Washed Caturra",
+      "origin": "Colombia",
+      "region": "Huila",
+      "estate": "Finca La Esperanza",
+      "variety": "Caturra",
+      "process": "washed",
+      "roastLevel": "medium-light",
+      "roaster": "Heart Coffee",
+      "roastDate": 1788935335863,
+      "purchaseDate": 1789108135863,
+      "weight": 340,
+      "price": 18,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Caramel",
+        "Orange",
+        "Brown Sugar",
+        "Honey"
+      ],
+      "altitude": "1500–2000 masl",
+      "harvest": "2023",
+      "isFavorite": false,
+      "brewCount": 3,
+      "lastBrewedAt": 1789194535863,
+      "cuppingScore": 84.8,
+      "cuppingScores": {
+        "aroma": 7.75,
+        "flavor": 7.83,
+        "aftertaste": 7.67,
+        "acidity": 7.75,
+        "body": 7.67,
+        "balance": 7.75,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 7.58
+      }
+    },
+    {
+      "id": "fad40d7c-d650-4295-a51b-ecad212c0531",
+      "createdAt": 1788244135863,
+      "updatedAt": 1789712935863,
+      "name": "Guatemala Huehuetenango Washed Bourbon",
+      "origin": "Guatemala",
+      "region": "Huehuetenango",
+      "estate": "Finca El Injerto",
+      "variety": "Bourbon",
+      "process": "washed",
+      "roastLevel": "medium",
+      "roaster": "Intelligentsia",
+      "roastDate": 1788676135863,
+      "purchaseDate": 1788935335863,
+      "weight": 340,
+      "price": 19,
+      "priceCurrency": "USD",
+      "tastingNotes": [
+        "Chocolate",
+        "Almond",
+        "Orange",
+        "Caramel"
+      ],
+      "altitude": "1600–1800 masl",
+      "harvest": "2023",
+      "isFavorite": false,
+      "brewCount": 4,
+      "lastBrewedAt": 1789712935863,
+      "cuppingScore": 89.8,
+      "cuppingScores": {
+        "aroma": 8.42,
+        "flavor": 8.42,
+        "aftertaste": 8.25,
+        "acidity": 8.42,
+        "body": 8.25,
+        "balance": 8.42,
+        "uniformity": 10,
+        "cleanCup": 10,
+        "sweetness": 10,
+        "cupperPoints": 8.33
+      }
+    }
+  ],
+  "brews": [
+    {
+      "id": "35a4ede2-13fc-4a20-bc23-ad85d54f0cf0",
+      "createdAt": 1789987833373,
+      "updatedAt": 1789987833373,
+      "beanId": "286357e7-4e5f-4847-beb0-c388d16a31f8",
+      "beanName": "TEST - simulated V60 - not brewed",
+      "beanOrigin": "Other",
+      "brewer": "",
+      "dripper": "hario_v60",
+      "grindSetting": "",
+      "coffeeWeight": 15,
+      "waterWeight": 250,
+      "waterTemp": 96,
+      "ratio": 16.67,
+      "startTime": 1789987833373,
+      "endTime": 1789987833373,
+      "pours": [],
+      "plannedSteps": [
+        {
+          "id": "cb6695d7-fde8-455d-9cb7-fc7756d25b5d",
+          "phase": "bloom",
+          "startMs": 0,
+          "durationMs": 40000,
+          "targetWeight": 45
+        },
+        {
+          "id": "894c8ada-6c06-4f66-8b1b-a0b2279ccff2",
+          "phase": "pour",
+          "startMs": 40000,
+          "durationMs": 30000,
+          "targetWeight": 113
+        },
+        {
+          "id": "2562d72e-710b-41ae-bb64-126b7df0acec",
+          "phase": "pour",
+          "startMs": 70000,
+          "durationMs": 30000,
+          "targetWeight": 181
+        },
+        {
+          "id": "c97711fd-6b40-49a1-a93c-0d8f7da58b4f",
+          "phase": "pour",
+          "startMs": 100000,
+          "durationMs": 30000,
+          "targetWeight": 250
+        },
+        {
+          "id": "7bbba000-65f5-4815-bd47-9ef953f3c761",
+          "phase": "drawdown",
+          "startMs": 130000,
+          "durationMs": 90000,
+          "targetWeight": 250
+        }
+      ],
+      "manualEntry": true,
+      "rating": 5,
+      "tastingProfile": {
+        "acidity": 3,
+        "sweetness": 3,
+        "body": 3,
+        "bitterness": 3,
+        "finish": 3
+      },
+      "notes": "TEST C3 ONLY - simulated, not brewed or tasted. 满意，下次希望原样复现。Independent satisfaction fixture; not evidence of improvement after B2. Keep 15 g coffee, 250 g water, 96 C and the saved pour plan. Grinder remains unknown.",
+      "_deleted": 0
+    },
+    {
+      "id": "41432502-34a3-414d-8be6-7112cac0186a",
+      "createdAt": 1789987936705,
+      "updatedAt": 1789987936705,
+      "beanId": "286357e7-4e5f-4847-beb0-c388d16a31f8",
+      "beanName": "TEST - simulated V60 - not brewed",
+      "beanOrigin": "Other",
+      "brewer": "",
+      "dripper": "hario_v60",
+      "grindSetting": "",
+      "coffeeWeight": 15,
+      "waterWeight": 270,
+      "waterTemp": 94,
+      "ratio": 18,
+      "startTime": 1789987936705,
+      "endTime": 1789987936705,
+      "pours": [],
+      "plannedSteps": [
+        {
+          "id": "5a25b355-5af4-45fd-ad8b-4edbcb9d9e07",
+          "phase": "bloom",
+          "startMs": 0,
+          "durationMs": 40000,
+          "targetWeight": 45
+        },
+        {
+          "id": "39c18374-c454-4371-8d2e-c42317b06687",
+          "phase": "pour",
+          "startMs": 40000,
+          "durationMs": 30000,
+          "targetWeight": 120
+        },
+        {
+          "id": "d92cf2dc-f9b4-499c-a01b-684ba2a38abb",
+          "phase": "pour",
+          "startMs": 70000,
+          "durationMs": 30000,
+          "targetWeight": 195
+        },
+        {
+          "id": "eb67fca2-cb86-44bd-96be-a8ac6e27102c",
+          "phase": "pour",
+          "startMs": 100000,
+          "durationMs": 30000,
+          "targetWeight": 270
+        },
+        {
+          "id": "959eb41c-898b-48a3-b82a-2cb7bd3663d0",
+          "phase": "drawdown",
+          "startMs": 130000,
+          "durationMs": 90000,
+          "targetWeight": 270
+        }
+      ],
+      "manualEntry": true,
+      "tastingProfile": {
+        "acidity": 3,
+        "sweetness": 3,
+        "body": 3,
+        "bitterness": 3,
+        "finish": 3
+      },
+      "notes": "TEST B2 COLLAPSED CONTROL - simulated, not brewed or tasted. 有点苦，但说不清；整体好坏不确定。No star selected; detailed tasting profile never opened. 15 g / 270 g / 94 C are researcher-set identifiers for this independent control, not advice or an improvement trajectory. Earlier TEST C3 at 250 g / 96 C remains the satisfaction fixture.",
+      "_deleted": 0
+    },
+    {
+      "id": "8135440d-2453-4c9f-8098-ed987468a1a5",
+      "beanId": "959c0594-9b52-41ac-87ee-480f496b06b7",
+      "beanName": "Kenya Nyeri Washed SL28 AA",
+      "beanOrigin": "Kenya",
+      "brewer": "fellow_stagg_ekg",
+      "dripper": "kalita_wave",
+      "grinder": "comandante_c40_mk4",
+      "filter": "paper_white",
+      "waterType": "mineral_adjusted",
+      "grindSetting": "22 (Comandante)",
+      "coffeeWeight": 20,
+      "waterWeight": 320,
+      "waterTemp": 95,
+      "ratio": 16,
+      "startTime": 1789540135864,
+      "endTime": 1789540330864,
+      "totalDuration": 195000,
+      "pours": [
+        {
+          "id": "47d0d397-9a44-4a16-a215-25b74d96fe39",
+          "phase": "bloom",
+          "pourNumber": 1,
+          "startMs": 0,
+          "endMs": 30000,
+          "targetWeight": 50,
+          "actualWeight": 48
+        },
+        {
+          "id": "0f413313-85b6-414e-a90e-ef44af7aa36a",
+          "phase": "pour",
+          "pourNumber": 2,
+          "startMs": 45000,
+          "endMs": 90000,
+          "targetWeight": 150,
+          "actualWeight": 152
+        },
+        {
+          "id": "955ced63-f8f6-489b-8719-2f32eeeb872f",
+          "phase": "pour",
+          "pourNumber": 3,
+          "startMs": 100000,
+          "endMs": 140000,
+          "targetWeight": 250,
+          "actualWeight": 248
+        },
+        {
+          "id": "9545bb23-0073-4783-a19d-2437cc7b6f0a",
+          "phase": "drawdown",
+          "pourNumber": 4,
+          "startMs": 140000,
+          "endMs": 210000,
+          "targetWeight": 300,
+          "actualWeight": 300
+        }
+      ],
+      "rating": 5,
+      "tastingProfile": {
+        "acidity": 5,
+        "sweetness": 3,
+        "body": 2,
+        "bitterness": 2,
+        "finish": 5,
+        "tastingNotes": [
+          "Blackberry",
+          "Grapefruit"
+        ]
+      },
+      "notes": "Intense blackcurrant. Try shorter grind next time.",
+      "createdAt": 1789540135864,
+      "updatedAt": 1789540135864
+    },
+    {
+      "id": "84e8454e-f614-42c3-bac3-6207bb61b04d",
+      "createdAt": 1789987653320,
+      "updatedAt": 1789987653320,
+      "beanId": "286357e7-4e5f-4847-beb0-c388d16a31f8",
+      "beanName": "TEST - simulated V60 - not brewed",
+      "beanOrigin": "Other",
+      "brewer": "",
+      "dripper": "hario_v60",
+      "grindSetting": "",
+      "coffeeWeight": 15,
+      "waterWeight": 250,
+      "waterTemp": 96,
+      "ratio": 16.67,
+      "startTime": 1789987653320,
+      "endTime": 1789987653320,
+      "pours": [],
+      "plannedSteps": [
+        {
+          "id": "e0e3a4fb-94aa-487d-b39d-516b616d9eb7",
+          "phase": "bloom",
+          "startMs": 0,
+          "durationMs": 40000,
+          "targetWeight": 45
+        },
+        {
+          "id": "9491bd8d-e374-4eba-9bbb-61ef3120e68b",
+          "phase": "pour",
+          "startMs": 40000,
+          "durationMs": 30000,
+          "targetWeight": 113
+        },
+        {
+          "id": "95250ab5-e0d3-4f55-8092-07c2e3df2ab3",
+          "phase": "pour",
+          "startMs": 70000,
+          "durationMs": 30000,
+          "targetWeight": 181
+        },
+        {
+          "id": "a135db14-ac1c-4173-86af-296f44b317d3",
+          "phase": "pour",
+          "startMs": 100000,
+          "durationMs": 30000,
+          "targetWeight": 250
+        },
+        {
+          "id": "36bc4557-33e7-4fb9-9a5e-6f1211a9783f",
+          "phase": "drawdown",
+          "startMs": 130000,
+          "durationMs": 90000,
+          "targetWeight": 250
+        }
+      ],
+      "manualEntry": true,
+      "tastingProfile": {
+        "acidity": 3,
+        "sweetness": 3,
+        "body": 3,
+        "bitterness": 3,
+        "finish": 3
+      },
+      "notes": "TEST B2 ONLY - simulated, not brewed or tasted. 有点苦，但说不清；整体好坏不确定，也不能判断与上一杯相比。No overall rating or sensory-axis score was intentionally selected. Independent fixture, not a continuation of an improved cup.",
+      "_deleted": 0
+    },
+    {
+      "id": "8ac273c7-8dd1-4649-8316-bd11da9a7dc3",
+      "beanId": "fad40d7c-d650-4295-a51b-ecad212c0531",
+      "beanName": "Guatemala Huehuetenango Washed Bourbon",
+      "beanOrigin": "Guatemala",
+      "brewer": "brewista_gen4",
+      "dripper": "chemex",
+      "grinder": "comandante_c40_mk4",
+      "filter": "chemex_bonded",
+      "waterType": "bottled",
+      "grindSetting": "28 (Comandante)",
+      "coffeeWeight": 30,
+      "waterWeight": 500,
+      "waterTemp": 94,
+      "ratio": 16.67,
+      "startTime": 1789712935864,
+      "endTime": 1789713190864,
+      "totalDuration": 255000,
+      "pours": [
+        {
+          "id": "374b68ad-8a22-4e4b-8131-7909b59fb925",
+          "phase": "bloom",
+          "pourNumber": 1,
+          "startMs": 0,
+          "endMs": 30000,
+          "targetWeight": 50,
+          "actualWeight": 48
+        },
+        {
+          "id": "181b754c-e1a7-46f6-92d0-650fc94aa1fb",
+          "phase": "pour",
+          "pourNumber": 2,
+          "startMs": 45000,
+          "endMs": 90000,
+          "targetWeight": 150,
+          "actualWeight": 152
+        },
+        {
+          "id": "07d69bdc-28f9-4fd0-93e6-b237e1aa4844",
+          "phase": "pour",
+          "pourNumber": 3,
+          "startMs": 100000,
+          "endMs": 140000,
+          "targetWeight": 250,
+          "actualWeight": 248
+        },
+        {
+          "id": "a6487889-ee36-4063-a735-cb7aea0d97ae",
+          "phase": "drawdown",
+          "pourNumber": 4,
+          "startMs": 140000,
+          "endMs": 210000,
+          "targetWeight": 300,
+          "actualWeight": 300
+        }
+      ],
+      "rating": 4,
+      "tastingProfile": {
+        "acidity": 3,
+        "sweetness": 4,
+        "body": 4,
+        "bitterness": 2,
+        "finish": 4,
+        "tastingNotes": [
+          "Chocolate",
+          "Caramel"
+        ]
+      },
+      "notes": "Rich chocolate body. Classic Antigua profile.",
+      "createdAt": 1789712935864,
+      "updatedAt": 1789712935864
+    },
+    {
+      "id": "ef21b348-9722-463b-8cff-1305dce818a1",
+      "beanId": "b50a07bd-a181-4f76-9946-89c07e52c0bb",
+      "beanName": "Ethiopia Kochere Washed Heirloom",
+      "beanOrigin": "Ethiopia",
+      "brewer": "fellow_stagg_ekg",
+      "dripper": "hario_v60",
+      "grinder": "comandante_c40_mk4",
+      "filter": "paper_white",
+      "waterType": "filtered",
+      "grindSetting": "24 (Comandante)",
+      "coffeeWeight": 18,
+      "waterWeight": 300,
+      "waterTemp": 96,
+      "ratio": 16.67,
+      "startTime": 1789885735863,
+      "endTime": 1789885945863,
+      "totalDuration": 210000,
+      "pours": [
+        {
+          "id": "5764929a-2d91-4ea7-a363-efd651e3fe20",
+          "phase": "bloom",
+          "pourNumber": 1,
+          "startMs": 0,
+          "endMs": 30000,
+          "targetWeight": 50,
+          "actualWeight": 48
+        },
+        {
+          "id": "98823be0-16f1-40c8-a705-fe60513d2bae",
+          "phase": "pour",
+          "pourNumber": 2,
+          "startMs": 45000,
+          "endMs": 90000,
+          "targetWeight": 150,
+          "actualWeight": 152
+        },
+        {
+          "id": "0130ac3d-e16f-4b9d-8085-1eafdf13c4f7",
+          "phase": "pour",
+          "pourNumber": 3,
+          "startMs": 100000,
+          "endMs": 140000,
+          "targetWeight": 250,
+          "actualWeight": 248
+        },
+        {
+          "id": "2e60bd81-4af1-413f-8a1c-f9c5dd41b915",
+          "phase": "drawdown",
+          "pourNumber": 4,
+          "startMs": 140000,
+          "endMs": 210000,
+          "targetWeight": 300,
+          "actualWeight": 300
+        }
+      ],
+      "rating": 5,
+      "tastingProfile": {
+        "acidity": 4,
+        "sweetness": 4,
+        "body": 3,
+        "bitterness": 1,
+        "finish": 5,
+        "tastingNotes": [
+          "Jasmine",
+          "Blueberry"
+        ]
+      },
+      "notes": "Perfect bloom. The jasmine really came through.",
+      "createdAt": 1789885735863,
+      "updatedAt": 1789885735863
+    }
+  ],
+  "exportedAt": 1789987937815
+}

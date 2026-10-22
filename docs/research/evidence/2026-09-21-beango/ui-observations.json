@@ -1,0 +1,157 @@
+{
+  "source": "https://beango.co/",
+  "observedDate": "2026-09-21",
+  "version": "v0.1.0",
+  "browser": "153.0.8010.48",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "synthetic": true,
+  "noActualBrewing": true,
+  "setupText": "BeanGo\nPour Over Tracker\nHome\nBrew\nBeans\nSettings\n\nBeanGo v0.1.0\n\n1\nSetup\n2\nTimer\n3\nReview\nNew Brew\n\nBrew Setup\n\nUse a recipe\n\nJames Hoffmann\nUltimate V60\n1:16.67 · 3 steps\nTetsu Kasuya\n4:6 Method\n1:15 · 5 steps\nScott Rao\nPercolation V60\n1:16.67 · 3 steps\n\nSelect Bean\n\nTEST - simulated V60 - not brewed\n\nOther\n\nGrinder\n—\nGrind Setting\nDripper\nHario V60\nFilter\n—\nKettle\n—\nWater Temperature\n°C\nWater\n—\nWater TDS\nppm\nCoffee Weight\ng\nWater Weight\ng\nRatio\n\nwater : coffee\n\nPour Schedule\n\nReset\nBloom\n@ 0:00\n−\ns\n+\n·\n−\ng\n+\nPour 1\n@ 0:40\n−\ns\n+\n·\n−\ng\n+\nPour 2\n@ 1:10\n−\ns\n+\n·\n−\ng\n+\nPour 3\n@ 1:40\n−\ns\n+\n·\n250\ng\nDrawdown\n@ 2:10\n−\ns\n+\nAdd Pour\n~3:40 total\nSave without timer\nStart Brew",
+  "setupFields": [
+    {
+      "value": "",
+      "labels": [
+        "Grind Setting"
+      ]
+    },
+    {
+      "value": "96",
+      "labels": [
+        "Water Temperature"
+      ]
+    },
+    {
+      "value": "",
+      "labels": [
+        "Water TDS"
+      ]
+    },
+    {
+      "value": "15",
+      "labels": [
+        "Coffee Weight"
+      ]
+    },
+    {
+      "value": "250",
+      "labels": [
+        "Water Weight"
+      ]
+    },
+    {
+      "value": "16.67",
+      "labels": [
+        "Ratio"
+      ]
+    },
+    {
+      "value": "40",
+      "labels": []
+    },
+    {
+      "value": "45",
+      "labels": []
+    },
+    {
+      "value": "30",
+      "labels": []
+    },
+    {
+      "value": "113",
+      "labels": []
+    },
+    {
+      "value": "30",
+      "labels": []
+    },
+    {
+      "value": "181",
+      "labels": []
+    },
+    {
+      "value": "30",
+      "labels": []
+    },
+    {
+      "value": "90",
+      "labels": []
+    }
+  ],
+  "b2Detail": "BeanGo\nPour Over Tracker\nHome\nBrew\nBeans\nSettings\n\nBeanGo v0.1.0\n\nBrew\n\n1 brews recorded\n\nNew Brew\nBREW HISTORY\nSEP\n21\nTEST - simulated V60 - not brewed\n\nOther\n\nHario V60\n15g\n1:16.7\ntoday · 06:47 PM\nTEST - simulated V60 - not brewed\n\nOther\n\ntoday · 06:47 PM\nLogged manually\n\nRECIPE\n\nDripper\n\nHario V60\n\nCoffee Weight\n\n15g\n\nWater Weight\n\n250g\n\nWater Temperature\n\n96°C\n\nRatio\n\n1:16.7\n\nBREW PLAN\n\n1\nBloom\n00:00\n(40s)\n45g\n2\nPour 1\n00:40\n(30s)\n113g\n3\nPour 2\n01:10\n(30s)\n181g\n4\nPour 3\n01:40\n(30s)\n250g\n5\nDrawdown\n02:10\n(90s)\n\nNOTES\n\nTEST B2 ONLY - simulated, not brewed or tasted. 有点苦，但说不清；整体好坏不确定，也不能判断与上一杯相比。No overall rating or sensory-axis score was intentionally selected. Independent fixture, not a continuation of an improved cup.\n\nDelete\nDone",
+  "c3Reopened": "BeanGo\nPour Over Tracker\nHome\nBrew\nBeans\nSettings\n\nBeanGo v0.1.0\n\nBrew\n\n2 brews recorded\n\nNew Brew\nBREW HISTORY\nSEP\n21\nTEST - simulated V60 - not brewed\n\nOther\n\nHario V60\n15g\n1:16.7\ntoday · 06:50 PM\nSEP\n21\nTEST - simulated V60 - not brewed\n\nOther\n\nHario V60\n15g\n1:16.7\ntoday · 06:47 PM\nTEST - simulated V60 - not brewed\n\nOther\n\ntoday · 06:50 PM\nLogged manually\n\nRECIPE\n\nDripper\n\nHario V60\n\nCoffee Weight\n\n15g\n\nWater Weight\n\n250g\n\nWater Temperature\n\n96°C\n\nRatio\n\n1:16.7\n\nBREW PLAN\n\n1\nBloom\n00:00\n(40s)\n45g\n2\nPour 1\n00:40\n(30s)\n113g\n3\nPour 2\n01:10\n(30s)\n181g\n4\nPour 3\n01:40\n(30s)\n250g\n5\nDrawdown\n02:10\n(90s)\n\nNOTES\n\nTEST C3 ONLY - simulated, not brewed or tasted. 满意，下次希望原样复现。Independent satisfaction fixture; not evidence of improvement after B2. Keep 15 g coffee, 250 g water, 96 C and the saved pour plan. Grinder remains unknown.\n\nDelete\nDone",
+  "c3OlderReopened": "BeanGo\nPour Over Tracker\nHome\nBrew\nBeans\nSettings\n\nBeanGo v0.1.0\n\nBrew\n\n3 brews recorded\n\nNew Brew\nBREW HISTORY\nSEP\n21\nTEST - simulated V60 - not brewed\n\nOther\n\nHario V60\n15g\n1:18\ntoday · 06:52 PM\nSEP\n21\nTEST - simulated V60 - not brewed\n\nOther\n\nHario V60\n15g\n1:16.7\ntoday · 06:50 PM\nSEP\n21\nTEST - simulated V60 - not brewed\n\nOther\n\nHario V60\n15g\n1:16.7\ntoday · 06:47 PM\nTEST - simulated V60 - not brewed\n\nOther\n\ntoday · 06:50 PM\nLogged manually\n\nRECIPE\n\nDripper\n\nHario V60\n\nCoffee Weight\n\n15g\n\nWater Weight\n\n250g\n\nWater Temperature\n\n96°C\n\nRatio\n\n1:16.7\n\nBREW PLAN\n\n1\nBloom\n00:00\n(40s)\n45g\n2\nPour 1\n00:40\n(30s)\n113g\n3\nPour 2\n01:10\n(30s)\n181g\n4\nPour 3\n01:40\n(30s)\n250g\n5\nDrawdown\n02:10\n(90s)\n\nNOTES\n\nTEST C3 ONLY - simulated, not brewed or tasted. 满意，下次希望原样复现。Independent satisfaction fixture; not evidence of improvement after B2. Keep 15 g coffee, 250 g water, 96 C and the saved pour plan. Grinder remains unknown.\n\nDelete\nDone",
+  "latestText": "BeanGo\nPour Over Tracker\nHome\nBrew\nBeans\nSettings\n\nBeanGo v0.1.0\n\n1\nSetup\n2\nTimer\n3\nReview\nNew Brew\n\nBrew Setup\n\nSame as last time\n\nBased on your brew today\n\nUse a recipe\n\nJames Hoffmann\nUltimate V60\n1:16.67 · 3 steps\nTetsu Kasuya\n4:6 Method\n1:15 · 5 steps\nScott Rao\nPercolation V60\n1:16.67 · 3 steps\n\nSelect Bean\n\nTEST - simulated V60 - not brewed\n\nOther\n\nGrinder\n—\nGrind Setting\nDripper\nHario V60\nFilter\n—\nKettle\n—\nWater Temperature\n°C\nWater\n—\nWater TDS\nppm\nCoffee Weight\ng\nWater Weight\ng\nRatio\n\nwater : coffee\n\nPour Schedule\n\nReset\nBloom\n@ 0:00\n−\ns\n+\n·\n−\ng\n+\nPour 1\n@ 0:40\n−\ns\n+\n·\n−\ng\n+\nPour 2\n@ 1:10\n−\ns\n+\n·\n−\ng\n+\nPour 3\n@ 1:40\n−\ns\n+\n·\n270\ng\nDrawdown\n@ 2:10\n−\ns\n+\nAdd Pour\n~3:40 total\nSave without timer\nStart Brew",
+  "latestFields": [
+    {
+      "value": "",
+      "labels": [
+        "Grind Setting"
+      ]
+    },
+    {
+      "value": "94",
+      "labels": [
+        "Water Temperature"
+      ]
+    },
+    {
+      "value": "",
+      "labels": [
+        "Water TDS"
+      ]
+    },
+    {
+      "value": "15",
+      "labels": [
+        "Coffee Weight"
+      ]
+    },
+    {
+      "value": "270",
+      "labels": [
+        "Water Weight"
+      ]
+    },
+    {
+      "value": "18",
+      "labels": [
+        "Ratio"
+      ]
+    },
+    {
+      "value": "40",
+      "labels": []
+    },
+    {
+      "value": "45",
+      "labels": []
+    },
+    {
+      "value": "30",
+      "labels": []
+    },
+    {
+      "value": "120",
+      "labels": []
+    },
+    {
+      "value": "30",
+      "labels": []
+    },
+    {
+      "value": "195",
+      "labels": []
+    },
+    {
+      "value": "30",
+      "labels": []
+    },
+    {
+      "value": "90",
+      "labels": []
+    }
+  ]
+}

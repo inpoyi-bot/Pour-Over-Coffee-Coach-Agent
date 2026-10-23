@@ -133,7 +133,7 @@ Some older eval history files are intentionally kept as iteration traces. For pa
 
 ## Limited Live Demo Deployment
 
-This project is reproducibly runnable locally and deployed as a limited live demo. The frontend is publicly hosted on Vercel; requests reach the ADK backend and SQLite session store through a Cloudflare Tunnel, while both backend processes remain on the local machine. `docs/START-TEST.md` records the first manual browser-to-agent acceptance and the operating runbook.
+This project is reproducibly runnable locally and, as of 2026-10-23, hosted for limited invited use on Vercel with Neon PostgreSQL sessions. The Vite frontend and FastAPI/ADK backend share the same origin through `/api`; normal hosted use no longer requires the author's computer or a tunnel. See [`docs/DEPLOY.md`](docs/DEPLOY.md) for the current runbook, access boundary, and deployment evidence. `docs/START-TEST.md` preserves the earlier Cloudflare Tunnel acceptance history.
 
 Supported:
 
@@ -142,15 +142,16 @@ Supported:
 - Documented local ADK runtime launch command.
 - Verified SQLite-backed session persistence across restarts.
 - Documented ADK eval regression commands and committed eval artifacts.
-- Public Vercel frontend plus a fixed Cloudflare Tunnel URL for limited live demonstrations.
-- One manually exercised browser-to-agent interaction through that deployed path.
+- Hosted Vercel frontend and backend with shared invite-code access and Neon session persistence.
+- User-assisted Preview browser verification of two brews, a same-brew probe, refresh persistence, and a rising trend, cross-checked against Neon.
+- Production HTTP checks of authentication, visitor isolation, real Gemini calls, and two explicitly synthetic brew records read back from Neon.
 
 Not claimed:
 
 - No Docker image.
-- No 24/7 hosted backend or Cloud Run deployment: the local machine, network, tunnel, and ADK process must remain available.
-- No CI/CD pipeline.
-- No production auth, monitoring, or scaling guarantees.
+- No Cloud Run deployment, load-test evidence, or uptime guarantee.
+- No custom CI test/release pipeline.
+- No per-person account recovery, usage quotas, or production operations guarantee. Runtime-log inspection is blocked by connector permissions; continuous monitoring is not configured.
 
 ## Evidence Map
 
@@ -165,7 +166,7 @@ This section maps repo artifacts back to the course/project concepts in SPEC §6
 | Guardrails | `record_cup` in `memory.py` rejects contradictory structured records; evals check contract-sensitive failures. | The build protects the memory trajectory from invalid action/termination records. |
 | Security features | `record_cup` invariants (`memory.py`) reject internally contradictory writes, for example a `terminate` decision co-occurring with an `adjust` write; credentials use `.env` and are never committed; `sessions.db` is git-ignored. | The build validates every write to persisted trajectory state, preventing a class of state-corruption failures. This is a data-contract guardrail, not adversarial-input or prompt-injection defense; no such threat model was tested in this version. |
 | MCP Server | `mcp_server/coffee_server.py` and `mcp_server/README.md` define and smoke-test static seed/precheck tools. | MCP demonstrates the external static-tool boundary; it is standalone and intentionally separate from the ADK runtime path. |
-| Deployability | `requirements.txt`, `.env.example`, `docs/DEPLOY.md`, `docs/START-TEST.md`, Vercel configuration, local ADK/SQLite launch commands, and eval run commands. | The project has a reproducible local run path and a manually exercised limited live-demo path: Vercel frontend → Cloudflare Tunnel → local ADK/SQLite backend. It does not claim a 24/7 hosted backend or production operations. |
+| Deployability | `requirements.txt`, `.env.example`, `app.py`, root `vercel.json`, `docs/DEPLOY.md`, local ADK/SQLite launch commands, and eval run commands. | The project has a reproducible local path and a hosted invited-use path: Vercel frontend → same-origin FastAPI/ADK → Neon. Preview browser checks and Production HTTP/Neon checks use synthetic inputs; this is not evidence of uptime, load capacity, or real-brew quality. |
 
 ## Failure-mode Evidence Table
 

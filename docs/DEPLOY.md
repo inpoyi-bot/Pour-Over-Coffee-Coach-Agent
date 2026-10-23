@@ -1,133 +1,79 @@
-# 试用部署 Runbook：Cloudflare Tunnel + Vercel
+# 受邀试用部署：Vercel + Neon
 
-本 runbook 把 coffee-coach 前端部署到 Vercel，并通过 Cloudflare **命名隧道**访问仍运行在本机的 ADK 后端。
+更新：2026-10-23。正式入口：<https://drip-coffee-maker.vercel.app/>。
 
-这是少量试用者的 v1 方案，不是 24/7 后端托管：你的电脑、ADK 进程和 `cloudflared` 进程都必须保持运行。
+前端和 FastAPI 后端均部署在 Vercel，通过同域 `/api` 通信；ADK 会话保存在 Neon PostgreSQL。日常试用不再依赖作者电脑、ADK 本地进程或 Cloudflare Tunnel 在线。
 
-## 已经配好
+这是 V60、只调研磨的有限邀请试用，保持 SPEC §3 的跨杯收敛回路；上线不代表诊断质量、成本或可用性的生产级保证。早期 Tunnel 路径的验证保留在 `docs/START-TEST.md` 和历史 handoff 中，不再作为当前部署步骤。
 
-- `frontend/` 是 Vercel Project Root；它使用 pnpm workspace 和固定的 `pnpm@11.7.0`。
-- `frontend/vercel.json` 会冻结安装依赖、只构建 `@workspace/coffee-coach`，并发布 `artifacts/coffee-coach/dist/public`。
-- Vercel production build 缺少 `VITE_API_BASE_URL` 会失败，避免发布后静默连向 `localhost`。
-- 原生依赖按平台作为 optional dependencies 解析：本机使用 darwin，Vercel 使用 Linux，不再有直接绑定 macOS 的依赖。
+## 发给受邀者
 
-## 你需要准备的值
+1. 分享正式入口。
+2. 从本机被 Git 忽略的 `.env.invitation-codes` 读取 `COFFEE_PRODUCTION_ACCESS_CODE` 等号右侧的值，通过你选择的私密渠道单独提供。不要分享整个文件、预览访问码或任何云服务凭证。
+3. 受邀者输入访问码即可开始，不需要 Vercel、Neon 或 Google 账号。
 
-| 名称 | 示例 | 用在何处 |
-| --- | --- | --- |
-| API 主机名 | `api.example.com` | Cloudflare Tunnel public hostname |
-| 固定 API URL | `https://api.example.com` | Vercel 的 `VITE_API_BASE_URL` |
-| Vercel 前端 URL | `https://coffee-coach.vercel.app` | ADK 的 CORS allowlist |
-| Tunnel token | Cloudflare Dashboard 生成的 `eyJ...` | 只在本机运行 `cloudflared` |
+访问码只发送到本项目后端验证，不写入前端存储。后端签发 Secure、HttpOnly、SameSite=Lax Cookie；每位访客有自己的会话身份，不能通过替换 user ID 读取他人会话。
 
-不要把 token、service-account JSON、`.env` 或真实 API URL 提交到 Git。
+## 配置位置
 
-## 1. 把域名接入 Cloudflare（手动）
+Vercel 项目：`drip-coffee-maker`。
 
-1. 在域名注册商处，将 nameserver 改为 Cloudflare 提供的值。
-2. 在 Cloudflare Dashboard 确认 zone 为 Active；DNS 传播可能需要等待。
-3. 决定 API 子域名，例如 `api.example.com`。
+**Project Root Directory 必须留空，即仓库根目录。** 根目录 `vercel.json` 分别定义 `frontend` 和 `backend` Services。不能再把 Project Root Directory 设为 `frontend`；代码分支没有该目录时会出现原始的 Root Directory 报错，有该目录时也会绕过根部的完整服务配置。
 
-## 2. 创建远程托管的命名隧道（手动）
-
-Cloudflare 推荐远程托管 tunnel：路由配置保存在 Dashboard，本机只需要 token 来运行连接器。
-
-1. 在 Cloudflare Dashboard 打开 **Networking > Tunnels**，创建 tunnel，例如 `coffee-adk`。
-2. 为 tunnel 添加 public hostname：
-   - Hostname：`api.example.com`
-   - Service type：`HTTP`
-   - Service URL：`http://localhost:8000`
-3. 保存后复制该 tunnel 的运行 token；把它只保存在本机的安全位置。
-4. 另开一个终端，在本机启动 tunnel：
-
-   ```sh
-   export TUNNEL_TOKEN='在这里粘贴 Cloudflare token'
-   cloudflared tunnel --edge-ip-version 4 --protocol http2 run
-   ```
-
-`--edge-ip-version 4 --protocol http2` 是这台机器网络阻断 IPv6/QUIC 时的兼容参数；网络正常时也可以省略，让 `cloudflared` 自动选择。看到 tunnel 显示 Healthy 后，`https://api.example.com` 才会转发到本机 8000 端口。
-
-## 3. 启动本机 ADK 后端并设置 CORS（手动）
-
-先创建并填写本机凭证文件：
-
-```sh
-cp .env.example agents/hello_agent/.env
-```
-
-按实际模型提供商填写 `agents/hello_agent/.env`。若使用 Vertex AI，按 `.env.example` 设置 `GOOGLE_GENAI_USE_VERTEXAI`、项目、地区和 `GOOGLE_APPLICATION_CREDENTIALS`；该 service-account 文件必须只留在本机。
-
-启动后端时只绑定 loopback，由 Tunnel 访问；将 Vercel **production** URL 放进 CORS allowlist：
-
-```sh
-set -a
-source agents/hello_agent/.env
-set +a
-
-./.venv/bin/adk api_server agents \
-  --host 127.0.0.1 \
-  --port 8000 \
-  --allow_origins 'https://coffee-coach.vercel.app' \
-  --session_service_uri 'sqlite+aiosqlite:///./sessions.db'
-```
-
-把示例 Vercel URL 换成部署后实际得到的 URL。若之后绑定前端自定义域名，也将该 origin 加入 allowlist。只为临时 Preview 测试时，可以使用 ADK 支持的正则形式 `regex:https://.*\\.vercel\\.app`；不要长期使用 `*`。
-
-## 4. 本机端到端预检（建议）
-
-在后端和 tunnel 都运行时：
-
-1. 打开 `https://api.example.com/docs`，确认 ADK OpenAPI 页面能通过 tunnel 访问。
-2. 在另一个终端运行前端开发服务器：
-
-   ```sh
-   cd frontend
-   VITE_API_BASE_URL=https://api.example.com \
-     pnpm --filter @workspace/coffee-coach run dev
-   ```
-
-3. 在浏览器完成一次冷启动 → 反馈 → probe → 轨迹。若浏览器报 CORS，先核对第 3 步的前端 origin 是否精确匹配。
-
-## 5. 导入并部署 Vercel 前端（手动）
-
-账号连接、Git 授权、环境变量填值和 Deploy 都由你在 Vercel Dashboard 完成。
-
-1. Import repository，并选择分支 `frontend-replit-v1`。
-2. 在 Build and Deployment 中把 **Root Directory** 设为 `frontend`。
-3. `frontend/vercel.json` 已提供 install、build 与 output 配置；不需要改为 npm，也不要用 npm 安装，因为 workspace 使用 `catalog:`。
-4. 在 Environment Variables 为 Production 添加：
-
-   ```text
-   VITE_API_BASE_URL=https://api.example.com
-   ```
-
-   这是构建时变量，会被打进前端静态文件。API URL 改变时，必须更新变量并重新部署。
-5. 部署后记下 Vercel 给出的 `https://...vercel.app` URL。若它与第 3 步预先填写的 URL 不同，停止后端，更新 `--allow_origins`，然后重新启动后端。
-
-## 6. 上线验收
-
-从 Vercel production URL 完成以下闭环：
-
-1. 新建一包豆并取得冷启动建议。
-2. 提交一杯反馈，确认出现单变量的下一步调整。
-3. 再提交 probe / 后续反馈，确认轨迹能读取上一杯并继续收敛。
-4. 在浏览器 Network 面板确认请求目标是 `https://api.example.com`，不是 `localhost`。
-
-这验证的是 SPEC §3 的跨杯收敛回路在真实跨域路径上仍成立，不只是静态前端页面能打开。
-
-## 常见故障
-
-| 症状 | 检查顺序 |
+| 层 | 当前配置 |
 | --- | --- |
-| Vercel build 报缺少 `VITE_API_BASE_URL` | 这是保护正常生效；在 Vercel Production 环境变量填固定 API URL 后重新部署。 |
-| Vercel 不认识 `catalog:` 或 workspace | Root Directory 必须是 `frontend`；确认 `frontend/package.json` 的 `packageManager` 仍是 pnpm，并保留 `pnpm-lock.yaml`。 |
-| 输出目录不存在 | 不要覆盖 `frontend/vercel.json` 的 build/output 配置；本地可运行 `VITE_API_BASE_URL=https://api.example.com NODE_ENV=production pnpm --filter @workspace/coffee-coach build` 复现。 |
-| 前端请求被 CORS 拦截 | ADK 的 `--allow_origins` 必须包含**实际** Vercel origin，协议、主机名和端口都要一致。 |
-| `api.example.com` 无响应 | 检查 ADK 是否仍在 8000 端口运行、Cloudflare tunnel 是否 Healthy、`cloudflared` 是否仍在运行。 |
-| Tunnel 连不上 Cloudflare | 这台机器网络可能阻断 IPv6 或 QUIC；使用第 2 步的 `--edge-ip-version 4 --protocol http2`。 |
+| 前端 | `frontend/` 下的 pnpm workspace，构建 `@workspace/coffee-coach` |
+| 前端 API 地址 | build command 显式设置 `VITE_API_BASE_URL=/api` |
+| 后端 | 仓库根目录 `app.py`，入口 `app:app` |
+| 会话库 | Neon pooled PostgreSQL URL，由 `DATABASE_URL` 注入 |
+| 模型 | 原有 Google Vertex AI 配置，后端调用 Gemini |
+| 网页身份 | 共享访问码 + 签名访客 Cookie |
 
-## 运营边界
+后端仅使用 Vercel 的服务端环境变量。真实值不写入源码、构建产物或本文档。
 
-- Tunnel URL 固定不代表后端已上云：电脑休眠、关机、断网或进程退出都会让试用者无法使用服务。
-- 每次试用会消耗你的 Vertex / 模型配额与 billing。
-- 若需要 24/7、无需个人电脑在线，下一阶段应将 ADK 后端迁移到 Cloud Run；这不在当前 v1 部署范围内。
+| 环境变量 | 类型 |
+| --- | --- |
+| `COFFEE_ACCESS_CODE` | Secret，16–256 字符 |
+| `COFFEE_COOKIE_SECRET` | Secret，至少 32 字符 |
+| `DATABASE_URL` | Secret，Neon pooled 连接串 |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | Secret，现有服务账号 JSON |
+| `GOOGLE_GENAI_USE_VERTEXAI` | Config，`true` |
+| `GOOGLE_CLOUD_PROJECT` | Config，实际项目 ID |
+| `GOOGLE_CLOUD_LOCATION` | Config，实际地区 |
+
+Production 使用独立的正式访问码、Cookie 密钥和 Neon 正式分支。Preview 变量只授予 `codex/vercel-neon-deploy` 分支，使用 Neon 验证分支和预览访问码。不能直接把 Preview 部署绑定到正式域名来代替 Production 构建，否则会沿用预览凭证。
+
+Vercel 保留 Standard Protection：Preview 和生成的 deployment URL 受 Vercel Authentication 保护，正式域名直接到应用访问码页。当前无需关闭项目级保护，也无需购买付费保护功能。
+
+## 发布与回退
+
+1. 在 Preview 验证将要发布的确切代码提交。
+2. 用同一代码提交和 Production 环境变量重新构建；检查 target、项目、提交及域名归属。
+3. 从正式域名验证页面、`/api/health`、未登录拦截、访问码登录、模型调用和持久化。
+4. 保留上一版 READY deployment；出现故障时在 Vercel 回退至适当的已知可用版本。后端版本不兼容时同时评估会话结构，不能用旧前端可访问证明新后端已恢复。
+
+2026-10-23 的正式发布：
+
+- 源码提交：`8906d715c2a3d0b212c1c4ffcd9bc3e91cd50934`。
+- Production deployment：`dpl_BbhSmLXnXce6HaUL85A7j3SzJVTG`，READY。
+- 正式域名已确认指向该 deployment。
+- 之前的正式 deployment 为仅前端的旧版，不能作为完整云端 Agent 的回退验收基线。
+
+## 本次验证证据
+
+所有冲煮输入均为明确标注的模拟数据，不代表真实品饮或真实冲煮质量。
+
+- Preview：浏览器手动完成第一杯、追问、第二杯及刷新；用户确认两杯记录和上升连线。独立 Neon 查询确认杯号为 `1、1、2`，前两轮无跨杯比较，第二杯对比为“变好”。
+- Production：未登录 HTTP 检查确认 `/`、`/trajectory`、新版 JS 资源及 `/api/health` 正常，`/api/auth/me` 返回 401。
+- Production：错误访问码被拒绝，正式码可登录；Cookie 属性和访客隔离检查通过。
+- Production：通过真实 Gemini 完成冷启动及两杯模拟反馈；重新读取会话并独立查询 Neon 正式分支，确认两杯分别为 `1、2`，对比分别为 `n/a、变好`，冻结参数保持一致。本次模型没有触发追问；追问的云端验证来自上述 Preview 测试。
+- 正式库中的该测试会话 ID 以 `deploy-check-` 开头，保留作为部署检查记录，不冒充用户采用数据。
+- 日志巡检未完成：Vercel runtime logs 接口返回 403，本机无已认证 Vercel CLI；项目未配置 log drain。不能据此声称生产日志无错误或已有持续监控。
+
+## 试用边界
+
+- 共享访问码可以被转发，不是逐人授权；目前没有个人账号恢复或逐人使用额度。
+- 轮换正式访问码或 Cookie 签名密钥会使已有访客 Cookie 失效。清 Cookie、换浏览器或换设备无法自动恢复原访客身份，页面历史也不是跨设备同步。
+- Agent 记忆保存在 Neon；页面回执缓存保存在当前浏览器。普通刷新保留记录，主动开始一包新豆会切换会话。
+- 模型请求消耗 Google 账号的调用费用和配额。本次上线未开通新的付费托管功能，免费额度不等于无限使用或硬性费用上限。
+- 验收覆盖部署和有限模拟流程，不等于完整模型评测、真实冲煮实验、负载测试或生产可用性承诺。

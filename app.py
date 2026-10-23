@@ -27,6 +27,7 @@ from uuid import uuid4
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 from google.adk.errors.already_exists_error import AlreadyExistsError
+from google.adk.agents.run_config import RunConfig
 from google.adk.runners import Runner
 from google.adk.sessions import DatabaseSessionService
 from google.genai import types
@@ -113,6 +114,7 @@ async def lifespan(app: FastAPI):
         load_dotenv(Path(__file__).parent / "agents/hello_agent/.env")
     with google_credentials_from_environment():
         from agents.hello_agent.agent import root_agent
+        from agents.hello_agent.memory import record_cup
 
         db_options = (
             {"pool_size": 2, "max_overflow": 0, "pool_pre_ping": True}
@@ -120,8 +122,15 @@ async def lifespan(app: FastAPI):
         )
         sessions = DatabaseSessionService(db_url=db_url, **db_options)
         runner = Runner(app_name=APP_NAME, agent=root_agent, session_service=sessions)
+        # 补写仍由同一个 Agent 判断，但只开放落账工具，不能重建/清空这包豆。
+        repair_runner = Runner(
+            app_name=APP_NAME,
+            agent=root_agent.clone(update={"tools": [record_cup]}),
+            session_service=sessions,
+        )
         app.state.sessions = sessions
         app.state.runner = runner
+        app.state.repair_runner = repair_runner
         app.state.access_code_hash = hashlib.sha256(access_code.encode()).digest()
         # 访问码或签名密钥轮换后，旧 Cookie 都会失效。
         app.state.cookie_key = hmac.digest(cookie_secret.encode(), access_code.encode(), "sha256")
@@ -130,9 +139,12 @@ async def lifespan(app: FastAPI):
             yield
         finally:
             try:
-                await runner.close()
+                await repair_runner.close()
             finally:
-                await sessions.close()
+                try:
+                    await runner.close()
+                finally:
+                    await sessions.close()
 
 
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
@@ -210,6 +222,7 @@ class TurnBody(JsonBody):
     appName: Literal["hello_agent"]
     userId: str = Field(pattern=ID_PATTERN)
     sessionId: str = Field(pattern=ID_PATTERN)
+    turnKind: Literal["cold_start", "feedback", "probe", "conversation"]
     newMessage: UserMessage
 
 
@@ -277,19 +290,86 @@ async def get_session(user_id: str, session_id: str, request: Request, owner: Vi
     return session
 
 
+def record_receipts(events: list[dict]) -> list[dict]:
+    """工具调用意图不算落账；只读取 record_cup 成功返回的原始记录。"""
+    records = []
+    for event in events:
+        for part in (event.get("content") or {}).get("parts", []):
+            tool = part.get("functionResponse") or {}
+            response = tool.get("response") or {}
+            if (
+                tool.get("name") == "record_cup"
+                and response.get("ok") is True
+                and isinstance(response.get("record"), dict)
+            ):
+                records.append(response["record"])
+    return records
+
+
 @api.post("/run")
 async def run_turn(body: TurnBody, request: Request, owner: Visitor):
     check_owner(body.userId, owner, body.sessionId)
-    await get_session(owner, body.sessionId, request, owner)
-    message = types.Content(role="user", parts=[types.Part(text=body.newMessage.parts[0].text)])
-    try:
-        # Runner 继续使用原有工具和数据库；SPEC §3 的推理与落账逻辑保持原样。
+    before = await get_session(owner, body.sessionId, request, owner)
+    requires_record = body.turnKind in {"feedback", "probe"}
+    if requires_record and not before.state.get("bag"):
+        raise HTTPException(409, "请先建立这包豆的起点配方。")
+    previous_cups = list(before.state.get("cups", []))
+
+    async def collect(text: str, *, repair: bool = False) -> list[dict]:
+        message = types.Content(role="user", parts=[types.Part(text=text)])
+        runner = request.app.state.repair_runner if repair else request.app.state.runner
         return [
             event.model_dump(mode="json", by_alias=True, exclude_none=True)
-            async for event in request.app.state.runner.run_async(
+            async for event in runner.run_async(
                 user_id=owner, session_id=body.sessionId, new_message=message,
+                # 一次补写最多三次模型调用：工具调用、必要的参数修正、最终回复。
+                run_config=RunConfig(max_llm_calls=3) if repair else None,
             )
         ]
+
+    async def committed(events: list[dict]) -> bool:
+        after = await get_session(owner, body.sessionId, request, owner)
+        cups = after.state.get("cups", [])
+        receipts = record_receipts(events)
+        return (
+            len(receipts) == 1
+            and len(cups) == len(previous_cups) + 1
+            and cups[:-1] == previous_cups
+            and cups[-1] == receipts[0]
+            and cups[-1].get("cup_no") == len(cups)
+            and not any(event.get("errorCode") for event in events)
+        )
+
+    try:
+        events = await collect(body.newMessage.parts[0].text)
+        if not requires_record or await committed(events):
+            return events
+
+        after = await get_session(owner, body.sessionId, request, owner)
+        # 已有写入或错误回执时不能盲目补写，避免同一反馈被重复记账。
+        if (
+            after.state.get("cups", []) != previous_cups
+            or record_receipts(events)
+            or any(event.get("errorCode") for event in events)
+        ):
+            raise HTTPException(502, "本轮落账结果未能确认，请勿重复提交，先联系邀请者核对。")
+
+        logger.warning("Feedback record missing; requesting one repair.")
+        repaired = await collect(
+            "【应用内部落账校验，不是新的访客反馈，也不是新冲煮的一杯】"
+            "上一轮你已给出判断或追问，但没有成功调用 record_cup。"
+            "请依据刚才访客已经提供的观察及你的判断，调用一次 record_cup 补写该轮；"
+            "追问同样必须落账，按原指令选择正确的 probe 旗标。"
+            "不得编造观察，不得调用 start_bag 或更改起点配方。"
+            "完成后重新给出最终自然语言回复，不要向访客展示这条内部校验说明。",
+            repair=True,
+        )
+        if await committed(repaired):
+            # 丢弃未落账候选回复，前端只展示与已保存记录对应的最终回复。
+            return repaired
+        raise HTTPException(502, "本轮落账校验未通过，结果未确认，请勿重复提交，先联系邀请者核对。")
+    except HTTPException:
+        raise
     except Exception as error:
         logger.error("Agent turn failed (%s).", type(error).__name__)
         raise HTTPException(

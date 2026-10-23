@@ -177,6 +177,11 @@ export default function Feedback() {
         <Button onClick={handleSubmit} disabled={mutation.isPending} className="feedback-submit w-full h-14 text-base">
           {mutation.isPending ? '正在读取这杯的变化…' : '提交记录'}
         </Button>
+        {mutation.isError && (
+          <p role="alert" className="text-sm text-destructive">
+            {mutation.error.message || '暂时无法完成本轮反馈，请稍后重试。'}
+          </p>
+        )}
         {mutation.isPending && (
           <p className="feedback-submit-status" role="status" aria-live="polite">
             正在和上一杯比较，马上给你下一步。

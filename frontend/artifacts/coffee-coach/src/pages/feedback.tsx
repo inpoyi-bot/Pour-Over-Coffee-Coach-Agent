@@ -66,7 +66,7 @@ export default function Feedback() {
 
     const nl = cupFeedbackToNaturalLanguage(input);
     setLatestSensory(sensory);
-    const result = await mutation.mutateAsync(nl);
+    const result = await mutation.mutateAsync({ text: nl, comparison: vsPrev });
     
     if (result.recordCup) {
       appendCup(result.recordCup);

@@ -210,7 +210,7 @@ export default function Diagnosis() {
   const terminateReasonText = terminateReasonLabel(recordCup?.terminate_reason);
   const confidence = confidenceDisplay(recordCup?.confidence);
   const turnTypeText = turnTypeLabel(recordCup?.turn_type);
-  const gradientText = gradientLabel(recordCup?.gradient);
+  const gradientText = gradientLabel(recordCup?.brew_no ? recordCup.comparison : recordCup?.gradient);
   const adjustmentText = adjustmentLabel(recordCup?.direction, recordCup?.step);
   const decisionText = decisionLabel(recordCup?.decision);
   const grindNowText = grindNowLabel(recordCup?.grind_now);

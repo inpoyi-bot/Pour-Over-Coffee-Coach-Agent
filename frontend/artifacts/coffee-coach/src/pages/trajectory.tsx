@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { getCupHistory, type StoredCup } from '@/lib/session';
+import { getCupHistory, groupBrewHistory, buildBrewTrend, type StoredCup } from '@/lib/session';
 import {
   Area,
   CartesianGrid,
@@ -28,6 +28,8 @@ import {
 const TRAJECTORY_VISUAL_SAMPLE: StoredCup[] = [
   {
     cup_no: 1,
+    brew_no: 1,
+    comparison: 'n/a',
     date: '2026-07-01',
     turn_type: 'adjust',
     gradient: '变好+同向',
@@ -40,6 +42,8 @@ const TRAJECTORY_VISUAL_SAMPLE: StoredCup[] = [
   },
   {
     cup_no: 2,
+    brew_no: 2,
+    comparison: '变好',
     date: '2026-07-02',
     turn_type: 'adjust',
     gradient: '变好+同向',
@@ -52,6 +56,8 @@ const TRAJECTORY_VISUAL_SAMPLE: StoredCup[] = [
   },
   {
     cup_no: 3,
+    brew_no: 3,
+    comparison: '变好',
     date: '2026-07-03',
     turn_type: 'adjust',
     gradient: '变好+同向',
@@ -64,6 +70,8 @@ const TRAJECTORY_VISUAL_SAMPLE: StoredCup[] = [
   },
   {
     cup_no: 4,
+    brew_no: 4,
+    comparison: '说不清',
     date: '2026-07-04',
     turn_type: 'terminate',
     terminate_reason: 'satisfied',
@@ -323,7 +331,10 @@ function TrajectoryDot({ cx, cy, payload }: any) {
 export default function Trajectory() {
   const savedHistory = getCupHistory();
   const isVisualSample = new URLSearchParams(window.location.search).get('sample') === 'trajectory';
-  const history = isVisualSample ? TRAJECTORY_VISUAL_SAMPLE : savedHistory;
+  const rawHistory = isVisualSample ? TRAJECTORY_VISUAL_SAMPLE : savedHistory;
+  const groups = groupBrewHistory(rawHistory);
+  const history = groups.filter((group) => group.brewNo !== null).map((group) => group.latest);
+  const hasLegacyTurns = groups.some((group) => group.brewNo === null);
   const currentCup = history[history.length - 1];
   const currentTurnType = turnTypeLabel(currentCup?.turn_type);
   const currentGrind = grindNowLabel(currentCup?.grind_now);
@@ -336,28 +347,25 @@ export default function Trajectory() {
     currentCup?.terminate_reason === 'would_overextract';
 
   const chartData = useMemo(() => {
-    let relativeHeight = 0;
-
-    return history.map((cup, i) => {
-      if (cup.gradient === '变好+同向' || cup.gradient === '变好') {
-        relativeHeight += 1;
-      } else if (cup.gradient === '变坏') {
-        relativeHeight -= 1;
-      }
-
+    return buildBrewTrend(groups).map((point, i) => {
+      const cup = point.record;
       const terminateReasonText = terminateReasonLabel(cup.terminate_reason);
-      const gradientText = gradientLabel(cup.gradient);
+      const gradientText = gradientLabel(cup.comparison);
       const adjustmentText = adjustmentLabel(cup.direction, cup.step);
 
       return {
-        name: `Cup ${cup.cup_no || i + 1}`,
-        cup_no: cup.cup_no || i + 1,
-        value: relativeHeight,
+        name: `Cup ${point.brewNo}`,
+        cup_no: point.brewNo,
+        value: point.value,
         date: cup.date || cup.recordedAt?.slice(0, 10),
-        tooltipText: terminateReasonText || gradientText || '暂未记录变化',
+        tooltipText: terminateReasonText || (i === 0 && point.brewNo === 1
+          ? '第一杯是起点，尚无跨杯对照'
+          : point.segmentStart && point.value !== null
+            ? '此前比较未知，从此杯重新建立比较起点'
+            : gradientText || '对比尚未确定'),
         tooltipLabel: terminateReasonText ? '这一轮判断' : '变化',
         turnbackLabel:
-          cup.gradient === '变坏' && cup.direction === 'coarser' && adjustmentText
+          cup.comparison === '变坏' && cup.direction === 'coarser' && adjustmentText
             ? `${gradientText} → ${adjustmentText}`
             : undefined,
         isCurrentConvergence:
@@ -367,9 +375,10 @@ export default function Trajectory() {
             cup.terminate_reason === 'would_overextract'),
       };
     });
-  }, [history]);
-  const trajectoryMin = Math.min(0, ...chartData.map((cup) => cup.value));
-  const trajectoryMax = Math.max(0, ...chartData.map((cup) => cup.value));
+  }, [groups, history.length]);
+  const hasTrend = chartData.some((point, i) => i > 0 && point.value !== null && chartData[i - 1].value !== null);
+  const trajectoryMin = Math.min(0, ...chartData.flatMap((cup) => cup.value === null ? [] : [cup.value]));
+  const trajectoryMax = Math.max(0, ...chartData.flatMap((cup) => cup.value === null ? [] : [cup.value]));
   const trajectoryTicks = [...new Set([trajectoryMin, 0, trajectoryMax])].sort((a, b) => a - b);
   const trajectoryTickLabel = (value: number) => {
     if (value === 0) return '起点';
@@ -409,7 +418,7 @@ export default function Trajectory() {
             <section className="trajectory-card trajectory-current-card bg-card border border-border p-4 space-y-3" aria-labelledby="current-status-heading">
               <div className="flex items-center justify-between gap-3">
                 <h2 id="current-status-heading" className="font-sans font-medium text-base text-foreground">当前状态</h2>
-                <span className="font-mono text-xs text-muted-foreground">第 {currentCup.cup_no || history.length} 杯</span>
+                <span className="font-mono text-xs text-muted-foreground">第 {currentCup.brew_no} 杯</span>
               </div>
               <div className="grid gap-3 text-sm sm:grid-cols-3">
                 <div>
@@ -428,12 +437,12 @@ export default function Trajectory() {
             </section>
           )}
 
-          {history.length >= 2 && (
+          {hasTrend ? (
           <section className="trajectory-card trajectory-chart-card bg-card border border-border p-4 space-y-4" aria-labelledby="trajectory-chart-heading">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 id="trajectory-chart-heading" className="font-sans font-medium text-base text-foreground">跨杯相对趋势</h2>
-                <p className="mt-1 font-mono text-[11px] text-muted-foreground">只读取相对上一杯的反馈梯度</p>
+                <p className="mt-1 font-mono text-[11px] text-muted-foreground">读取你相对上一杯的明确对比；未知处断开，后续从新起点比较。</p>
               </div>
               <span className="font-mono text-[11px] text-muted-foreground">CUP 01–{String(history.length).padStart(2, '0')}</span>
             </div>
@@ -488,20 +497,28 @@ export default function Trajectory() {
                     dot={<TrajectoryDot />}
                     activeDot={false}
                     isAnimationActive={false}
+                    connectNulls={false}
                   />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
           </section>
+          ) : (
+            <section className="trajectory-card border border-border bg-card p-4 text-sm text-muted-foreground" aria-label="暂无跨杯趋势">
+              尚无可比较的跨杯趋势。追问和补充回答属于同一杯；下一杯有明确对比后再连线，未知对比暂不连线。
+            </section>
           )}
         </>
       ) : (
         <div className="trajectory-card p-8 text-center text-muted-foreground text-sm font-mono border border-dashed border-border bg-card">
-          还没有记录
+          {hasLegacyTurns ? '旧版回合尚未区分杯号，保留在下方历史中，不纳入新版跨杯趋势。' : '还没有记录'}
         </div>
       )}
 
       <div className="pt-2">
+        {hasLegacyTurns && history.length > 0 && (
+          <p className="mb-4 text-xs text-muted-foreground">旧版回合未区分杯号，保留原记录；新版杯号从 1 开始，不与旧版回合混算。</p>
+        )}
         {hasEnding ? (
           <details className="cup-history-details group">
             <summary className="flex w-fit cursor-pointer list-none items-center gap-1 font-mono text-sm text-muted-foreground">
@@ -509,11 +526,11 @@ export default function Trajectory() {
               <ChevronDown className="h-4 w-4 transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none group-open:rotate-180" />
             </summary>
             <div className="pt-5">
-              <CupTimeline history={history} />
+              <CupTimeline history={rawHistory} />
             </div>
           </details>
         ) : (
-          <CupTimeline history={history} />
+          <CupTimeline history={rawHistory} />
         )}
       </div>
     </div>

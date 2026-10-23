@@ -3,7 +3,8 @@
 设计要点(和你逐轮敲定的):
 - 一包豆 = 一个(持久化)session;轨迹存在 session state 里。
   state["bag"]  = 包级表头(冷启动写一次)
-  state["cups"] = 每杯一条结构化记录(record_cup 追加)
+  state["cups"] = 逐回合的原始记录(record_cup 追加，追问也保留)
+  网页回执 brew_no 是实际杯号；turn_no/cup_no 是回合序号(cup_no 保留兼容旧调用)。
   (user: 作用域留给将来的"用户级口味画像",本版不写)
 - seed 配方 = 静态查找表(SPEC §6.5:商品化层用静态规则,不用 agent)。
 - flags 分两类:agent 声明的(asserted) vs 工具从表头/豆龄派生的(derived),
@@ -270,8 +271,25 @@ def record_cup(
     if age is not None and _bean_band(bag.get("roast", "中"), age) == "stale":
         flags_derived.append("bean_aged")
 
+    web_turn = state.get("_web_turn") or {}
+    brew_no = web_turn.get("brew_no")
+    web_fields = {}
+    if web_turn.get("kind") in {"feedback", "probe"} and isinstance(brew_no, int) and brew_no > 0:
+        comparison = "n/a" if brew_no == 1 else web_turn.get("comparison", "说不清")
+        vs_prev = comparison
+        # 第一杯及未知对比不能凭空变成“没变”。已收敛是毕业信号，不是相对梯度。
+        if comparison not in {"变好", "变坏", "没变"} and gradient != "已收敛":
+            gradient = "n/a"
+        web_fields = {
+            "brew_no": brew_no,
+            "turn_no": len(cups) + 1,
+            "input_kind": web_turn["kind"],
+            "comparison": comparison,
+        }
+
     record = {
         "cup_no": len(cups) + 1,
+        **web_fields,
         "date": date.today().isoformat(),
         "bean_age_days": age,
         "axis": "grind",                       # 预留多轴
@@ -346,14 +364,33 @@ def render_trajectory(state) -> str:
         f"{bag['grinder_type']} 基准={bag.get('baseline_grind')} · "
         f"目标{bag['ratio']} {bag['water_temp_actual_c']}°C · 相位={bag['phase']} · 手法已冻结",
     ]
-    cups = get("cups", []) or []
-    lines.append(f"已冲 {len(cups)} 杯:")
+    turns = get("cups", []) or []
+    current = get("_web_turn") or {}
+    numbered = {}
+    legacy = []
+    for turn in turns:
+        if turn.get("brew_no"):
+            numbered[turn["brew_no"]] = turn
+        else:
+            legacy.append(turn)
+    if numbered or current.get("brew_no"):
+        lines.append(f"新版已记录 {len(numbered)} 杯、{len(turns) - len(legacy)} 回合。追问回答属于同一杯；以下每杯只读最新判断。")
+        if legacy:
+            lines.append(f"另有 {len(legacy)} 条旧版回合，杯号未区分；保留历史，不能当成新版跨杯比较。")
+        cups = list(numbered.values())
+    else:
+        # 无网页上下文的既有 ADK/eval 调用维持原协议，不猜历史记录的杯号。
+        cups = legacy
+        lines.append(f"已记录 {len(cups)} 条历史记录:")
+    if current.get("brew_no"):
+        comparison = "n/a" if current["brew_no"] == 1 else current.get("comparison", "说不清")
+        lines.append(f"当前是第 {current['brew_no']} 杯，入口={current['kind']}，用户明确对比={comparison}。第一杯无跨杯对照；说不清/未知绝不能当成没变。")
     for c in cups:
         r = c["report"]
         direction = c.get("direction") or "—"
         step = c.get("step") or ""
         lines.append(
-            f"- 杯{c['cup_no']}[{c['turn_type']}] "
+            f"- 杯{c.get('brew_no', c['cup_no'])}[{c['turn_type']}] "
             f"{direction}{(' '+step) if step else ''} "
             f"报告{{{r['sensory']} / vs上杯:{r['vs_prev']} / {r['brew_time']} / "
             f"床面:{r['bed_shape']} / 挂粉环:{r['wall_ring']}}} "

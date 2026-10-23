@@ -105,6 +105,52 @@ export interface StoredCup extends RecordCup {
   recordedAt: string;
 }
 
+export interface BrewGroup {
+  brewNo: number | null;
+  turns: StoredCup[];
+  latest: StoredCup;
+}
+
+/** 保留逐回合回执，仅按服务端明确给出的杯号分组；不推断旧版回合属于哪杯。 */
+export function groupBrewHistory(history: StoredCup[]): BrewGroup[] {
+  const groups: BrewGroup[] = [];
+  const byBrew = new Map<number, BrewGroup>();
+  for (const turn of history) {
+    const brewNo = typeof turn.brew_no === 'number' && Number.isInteger(turn.brew_no) && turn.brew_no > 0
+      ? turn.brew_no : null;
+    const existing = brewNo === null ? undefined : byBrew.get(brewNo);
+    if (existing) {
+      existing.turns.push(turn);
+      existing.latest = turn;
+    } else {
+      const group = { brewNo, turns: [turn], latest: turn };
+      groups.push(group);
+      if (brewNo !== null) byBrew.set(brewNo, group);
+    }
+  }
+  return groups;
+}
+
+/** 每杯一个点。未知比较保留断点，不当成“没变化”，也不跨断点累计。 */
+export function buildBrewTrend(groups: BrewGroup[]) {
+  let height = 0;
+  let previousKnown = false;
+  return groups.filter((group) => group.brewNo !== null).map((group, index) => {
+    const comparison = group.latest.comparison;
+    const known = comparison === '变好' || comparison === '变坏' || comparison === '没变';
+    let value: number | null = null;
+    const segmentStart = !previousKnown;
+    if (index === 0 && group.brewNo === 1) {
+      value = 0; // 第一杯只是比较起点，不宣称变好、变坏或没变。
+    } else if (known) {
+      height = previousKnown ? height + (comparison === '变好' ? 1 : comparison === '变坏' ? -1 : 0) : 0;
+      value = height;
+    }
+    previousKnown = value !== null;
+    return { record: group.latest, brewNo: group.brewNo!, value, segmentStart };
+  });
+}
+
 export function getCupHistory(): StoredCup[] {
   if (!verifiedUserId) return [];
   const raw = localStorage.getItem(storageKey(CUPS_KEY));

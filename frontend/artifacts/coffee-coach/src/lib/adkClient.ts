@@ -23,6 +23,7 @@ export interface AdkPart {
 
 /** 仅描述 UI 回合来源；诊断内容仍以自然语言传入 Agent。 */
 export type TurnKind = 'cold_start' | 'feedback' | 'probe' | 'conversation';
+export type UserComparison = '变好' | '变坏' | '没变' | '说不清';
 
 export interface AdkEvent {
   author?: string;
@@ -33,7 +34,12 @@ export interface AdkEvent {
  * Field names/values remain raw at the transport boundary; user-facing
  * components translate them through diagnosisCopy.ts per FRONTEND.md. */
 export interface RecordCup {
+  /** cup_no 是旧版回合序号；网页的真实杯号由服务端 brew_no 给出。 */
   cup_no?: number;
+  brew_no?: number;
+  turn_no?: number;
+  input_kind?: TurnKind;
+  comparison?: UserComparison | 'n/a';
   date?: string;
   turn_type?: string;
   terminate_reason?: string;
@@ -181,6 +187,7 @@ export async function sendTurn(
   sessionId: string,
   text: string,
   turnKind: TurnKind,
+  comparison?: UserComparison,
 ): Promise<AgentTurnResult> {
   await ensureSession(userId, sessionId);
 
@@ -192,6 +199,7 @@ export async function sendTurn(
       userId,
       sessionId,
       turnKind,
+      comparison,
       newMessage: {
         role: 'user',
         parts: [{ text }],

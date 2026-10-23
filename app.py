@@ -223,6 +223,7 @@ class TurnBody(JsonBody):
     userId: str = Field(pattern=ID_PATTERN)
     sessionId: str = Field(pattern=ID_PATTERN)
     turnKind: Literal["cold_start", "feedback", "probe", "conversation"]
+    comparison: Literal["变好", "变坏", "没变", "说不清"] | None = None
     newMessage: UserMessage
 
 
@@ -314,6 +315,18 @@ async def run_turn(body: TurnBody, request: Request, owner: Visitor):
     if requires_record and not before.state.get("bag"):
         raise HTTPException(409, "请先建立这包豆的起点配方。")
     previous_cups = list(before.state.get("cups", []))
+    # 杯号来自页面动作，不让模型猜；补写沿用同一份上下文，不再增加杯号。
+    web_turn = {"kind": body.turnKind}
+    if body.turnKind == "feedback":
+        brew_no = max((c.get("brew_no", 0) for c in previous_cups), default=0) + 1
+        web_turn.update(brew_no=brew_no, comparison=body.comparison or "说不清")
+    elif body.turnKind == "probe":
+        if not previous_cups or not previous_cups[-1].get("brew_no"):
+            raise HTTPException(409, "旧版回合没有明确杯号，请保留旧记录并从新版新会话继续。")
+        latest = previous_cups[-1]
+        if latest.get("turn_type") != "probe":
+            raise HTTPException(409, "这一杯没有待回答的追问，请从反馈页面记录下一杯。")
+        web_turn.update(brew_no=latest["brew_no"], comparison=latest.get("comparison", "说不清"))
 
     async def collect(text: str, *, repair: bool = False) -> list[dict]:
         message = types.Content(role="user", parts=[types.Part(text=text)])
@@ -322,6 +335,7 @@ async def run_turn(body: TurnBody, request: Request, owner: Visitor):
             event.model_dump(mode="json", by_alias=True, exclude_none=True)
             async for event in runner.run_async(
                 user_id=owner, session_id=body.sessionId, new_message=message,
+                state_delta={"_web_turn": web_turn},
                 # 一次补写最多三次模型调用：工具调用、必要的参数修正、最终回复。
                 run_config=RunConfig(max_llm_calls=3) if repair else None,
             )
@@ -337,6 +351,7 @@ async def run_turn(body: TurnBody, request: Request, owner: Visitor):
             and cups[:-1] == previous_cups
             and cups[-1] == receipts[0]
             and cups[-1].get("cup_no") == len(cups)
+            and cups[-1].get("brew_no") == web_turn["brew_no"]
             and not any(event.get("errorCode") for event in events)
         )
 

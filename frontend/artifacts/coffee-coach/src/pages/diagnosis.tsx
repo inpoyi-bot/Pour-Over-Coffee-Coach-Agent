@@ -191,7 +191,7 @@ function CoachExplanation({ message }: { message: string }) {
 export default function Diagnosis() {
   const { latestTurn, setLatestTurn } = useContext(AppContext);
   const [, setLocation] = useLocation();
-  const mutation = useSendTurn();
+  const mutation = useSendTurn('probe');
   const isVisualSample = new URLSearchParams(window.location.search).get('sample') === 'diagnosis';
   const activeTurn: Pick<AgentTurnResult, 'messages' | 'recordCup'> | null =
     isVisualSample ? DIAGNOSIS_VISUAL_SAMPLE : latestTurn;
@@ -360,7 +360,7 @@ export default function Diagnosis() {
           </div>
           {mutation.isError && (
             <p role="alert" className="text-sm text-destructive">
-              没有成功发出这次回答，请检查连接后重试。
+              {mutation.error.message || '暂时无法完成这次回答，请稍后重试。'}
             </p>
           )}
         </section>

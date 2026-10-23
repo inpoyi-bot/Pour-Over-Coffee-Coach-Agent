@@ -119,7 +119,7 @@ function CoachExplanation({ message }: { message: string }) {
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const mutation = useSendTurn();
+  const mutation = useSendTurn('cold_start');
 
   const [roastLevel, setRoastLevel] = useState('');
   const [roastDate, setRoastDate] = useState('');
@@ -365,6 +365,11 @@ export default function Home() {
         >
           {mutation.isPending ? '生成起点配方...' : '提交建立基线'}
         </Button>
+        {mutation.isError && (
+          <p role="alert" className="text-sm text-destructive">
+            {mutation.error.message || '暂时无法生成起点配方，请稍后重试。'}
+          </p>
+        )}
         {showMissing && !canSubmit && (
           <p id="form-incomplete-hint" role="status" className="coldstart-incomplete-hint text-sm text-muted-foreground">
             请补全标记为必填的项目。

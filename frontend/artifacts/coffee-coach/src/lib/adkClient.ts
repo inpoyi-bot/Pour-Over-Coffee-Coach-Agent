@@ -16,9 +16,13 @@ import { ADK_APP_NAME, ADK_BASE_URL } from './config';
 
 export interface AdkPart {
   text?: string;
+  thought?: boolean;
   functionCall?: { name: string; args?: Record<string, unknown> };
   functionResponse?: { name: string; response?: Record<string, unknown> };
 }
+
+/** 仅描述 UI 回合来源；诊断内容仍以自然语言传入 Agent。 */
+export type TurnKind = 'cold_start' | 'feedback' | 'probe' | 'conversation';
 
 export interface AdkEvent {
   author?: string;
@@ -67,8 +71,7 @@ export interface StartBagResult {
 export interface AgentTurnResult {
   /** Every text part the agent said this turn, in order. */
   messages: string[];
-  /** The most recent record_cup-shaped functionResponse/functionCall payload
-   * seen in this turn's events, if any. */
+  /** The exact record returned by a successful record_cup write, if any. */
   recordCup: RecordCup | null;
   /** Structured start_bag output, present only on the cold-start turn. */
   startBag: StartBagResult | null;
@@ -80,6 +83,14 @@ export interface AgentTurnResult {
 async function parseJsonOrThrow(res: Response, context: string) {
   if (!res.ok) {
     const body = await res.text().catch(() => '');
+    if (res.status === 502 || res.status === 409) {
+      let detail: string | undefined;
+      try {
+        const error = JSON.parse(body);
+        if (typeof error.detail === 'string') detail = error.detail;
+      } catch { /* 非 JSON 错误仍使用下方通用处理。 */ }
+      if (detail) throw new Error(detail);
+    }
     throw new Error(
       `ADK request failed (${context}): ${res.status} ${res.statusText} ${body}`.trim(),
     );
@@ -115,27 +126,20 @@ export async function ensureSession(
 
 function extractRecordCup(events: AdkEvent[]): RecordCup | null {
   let persistedRecord: RecordCup | null = null;
-  let toolCallArgs: RecordCup | null = null;
 
   for (let i = events.length - 1; i >= 0; i -= 1) {
     const parts = events[i]?.content?.parts ?? [];
     for (const part of parts) {
       const fr = part.functionResponse;
-      const fc = part.functionCall;
-      if (fr && /record_cup/i.test(fr.name ?? '') && !persistedRecord) {
-        const response = fr.response as RecordCupToolResponse | undefined;
-        persistedRecord = response?.record ?? null;
-      }
-      if (fc && /record_cup/i.test(fc.name ?? '') && !toolCallArgs) {
-        toolCallArgs = (fc.args as RecordCup) ?? null;
+      if (fr?.name === 'record_cup' && !persistedRecord) {
+        const response = fr.response as (RecordCupToolResponse & { ok?: boolean }) | undefined;
+        if (response?.ok === true) persistedRecord = response.record ?? null;
       }
     }
   }
 
-  // Prefer the state-write result: it carries derived fields and the exact
-  // cup number that the agent will see on its next turn. Tool-call arguments
-  // are only a compatibility fallback for older backends.
-  return persistedRecord ?? toolCallArgs;
+  // 调用参数只是模型意图，不能当成数据库已经保存的记录。
+  return persistedRecord;
 }
 
 function extractStartBag(events: AdkEvent[]): StartBagResult | null {
@@ -154,8 +158,9 @@ function extractStartBag(events: AdkEvent[]): StartBagResult | null {
 function extractMessages(events: AdkEvent[]): string[] {
   const messages: string[] = [];
   for (const event of events) {
+    if (event.content?.role !== 'model') continue;
     for (const part of event.content?.parts ?? []) {
-      if (part.text && part.text.trim().length > 0) {
+      if (!part.thought && part.text && part.text.trim().length > 0) {
         messages.push(part.text.trim());
       }
     }
@@ -175,6 +180,7 @@ export async function sendTurn(
   userId: string,
   sessionId: string,
   text: string,
+  turnKind: TurnKind,
 ): Promise<AgentTurnResult> {
   await ensureSession(userId, sessionId);
 
@@ -185,6 +191,7 @@ export async function sendTurn(
       appName: ADK_APP_NAME,
       userId,
       sessionId,
+      turnKind,
       newMessage: {
         role: 'user',
         parts: [{ text }],
@@ -193,10 +200,14 @@ export async function sendTurn(
   });
 
   const events: AdkEvent[] = await parseJsonOrThrow(res, '/run');
+  const recordCup = extractRecordCup(events);
+  if ((turnKind === 'feedback' || turnKind === 'probe') && !recordCup) {
+    throw new Error('本轮未收到已保存的记录，请勿重复提交，先联系邀请者核对。');
+  }
 
   return {
     messages: extractMessages(events),
-    recordCup: extractRecordCup(events),
+    recordCup,
     startBag: extractStartBag(events),
     rawEvents: events,
   };
